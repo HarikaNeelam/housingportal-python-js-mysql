@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Website</title>
+    <!-- Add your CSS link here -->
+    <style>
+        /* CSS for the navigation menu */
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-left: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="static/homepage/birminghamhomes.png" alt="Real Estate Logo">
+            </div>
+            <!-- Login Buttons -->
+            <div class="login-buttons">
+                <a href="{{ url_for('signup') }}" class="user-login-btn">User Login</a>
+                <a href="{{ url_for('home') }}" class="admin-login-btn">Admin Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Properties</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <!-- Background Image -->
+        <div class="hero-image">
+            <img src="static/homepage/birminghamhomes.png" alt="Hero Image">
+        </div>
+        <!-- Content Overlapping the Image -->
+        <div class="hero-content">
+            <!-- Your headline or call-to-action -->
+            <h1>Welcome to Our Real Estate Website</h1>
+            <!-- Add a brief description or tagline -->
+            <p>Find your dream home with us.</p>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="featured-properties">
+        <div class="container">
+            <!-- Property Cards -->
+            <div class="property-card">
+                <img src="static/homepage/birminghamhomes.png" alt="Property 1">
+                <h3>Property Name 1</h3>
+                <p>Price: $XXX,XXX</p>
+                <p>Location: City, State</p>
+                <p>Bedrooms: X | Bathrooms: X</p>
+            </div>
+            <!-- Add more property cards here -->
+        </div>
+    </section>
+
+    <!-- Services or Benefits Section -->
+    <section class="services-section">
+        <div class="container">
+            <!-- Service 1 -->
+            <div class="service">
+                <!-- Add an icon or illustration here -->
+                <h3>Service/Benefit Name 1</h3>
+                <p>Description of the service or benefit.</p>
+            </div>
+            <!-- Add more services or benefits here -->
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <!-- Testimonial 1 -->
+            <div class="testimonial">
+                <img src="static/homepage/birminghamhomes.png" alt="Client 1">
+                <h3>Client Name 1</h3>
+                <p>Testimonial text goes here.</p>
+            </div>
+            <!-- Add more testimonials here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <!-- Add footer content here, such as contact details and social media links -->
+        </div>
+    </footer>
+
+    <!-- Add your JavaScript link here -->
+</body>
+
+</html>

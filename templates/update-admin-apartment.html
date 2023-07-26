@@ -1,0 +1,46 @@
+{%extends "layout.html"%}
+{%block content%}
+  <div>
+
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th class="column1">apt_id</th>
+              <th class="column2">bid</th>
+              <th class="column5">owner_per_id</th>
+              <th class="column7">status</th>
+            </tr>
+          </thead>
+          <tbody>
+              {%for items in data %}
+              <tr>
+
+                <td class="column1">{{ items[0] }}</td>
+                <td class="column2">{{ items[1] }}</td>
+                <td class="column3">{{ items[2] }}</td>
+                <td class="column4">{{ items[3] }}</td>
+
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="newsletter-right">
+          <form id="mc-form2" class="mailing-list cf" method = "post">
+            <input id="mc-email2" type="text" value="" name="apt_id" style = "padding-right:20px" style = "padding-left:20px"placeholder="apt_id">
+            <input id="mc-email2" type="text" value="" name="sid" style = "padding-right:20px" style = "padding-left:20px"placeholder="bid">
+            <input id="mc-email2" type="text" value="" name="owner_id" style = "padding-right:20px" style = "padding-left:20px"placeholder="owner_id">
+            <input id="mc-email2" type="text" value="" name="status" placeholder="new status" style = "padding-right:20px" style = "padding-left:20px">
+            <!-- <input id="mc-email2" type="text" value="" name="name" style = "padding-right:20px" style = "padding-left:20px"placeholder=" new owner name">
+            <input id="mc-email2" type="text" value="" name="number" style = "padding-right:20px" style = "padding-left:20px"placeholder="new owner number">
+            <div class="container" style="padding-top: 50px" > -->
+               <button type="submit" id="insert" class="btn btn-secondary" >Update </button>
+            </div>
+          </form>
+      <div class="container" style="padding-top: 20px" >
+
+         <button type="button" onclick="window.location.href='/'"class="btn btn-secondary"  >Logout</button>
+       </div
+    </div>
+
+  {%endblock%}

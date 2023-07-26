@@ -1,0 +1,41 @@
+{%extends "layout.html"%}
+{%block content%}
+  <div>
+
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th class="column1">bid</th>
+              <th class="column2">name</th>
+              <th class="column3">address</th>
+              <th class="column4">mgr_per_id</th>
+            </tr>
+          </thead>
+          <tbody>
+              {%for items in data %}
+              <tr>
+                <td class="column1">{{ items[0] }}</td>
+                <td class="column2">{{ items[1] }}</td>
+                <td class="column3">{{ items[2] }}</td>
+                <td class="column4">{{ items[3] }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="newsletter-right">
+          <form id="mc-form2" class="mailing-list cf" method = "post">
+            <input id="mc-email2" type="text" value="" name="bid" style = "padding-right:20px" style = "padding-left:20px"placeholder="bid">
+            <input id="mc-email2" type="text" value="" name="mgr_per_id" placeholder=" new mgr_per_id" style = "padding-right:20px" style = "padding-left:20px">
+
+            <div class="container" style="padding-top: 50px" >
+               <button type="submit" id="insert" class="btn btn-secondary"  >Update values</button>
+            </div>
+          </form>
+      <div class="container" style="padding-top: 20px" >
+
+         <button type="button" onclick="window.location.href='home'"class="btn btn-secondary"  >Logout</button>
+       </div
+    </div>
+
+  {%endblock%}

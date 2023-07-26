@@ -1,2 +1,2 @@
-# web-app-final-project
-Housing Portal for Birmingham.
+Python Flask Apartment Purchase system
+

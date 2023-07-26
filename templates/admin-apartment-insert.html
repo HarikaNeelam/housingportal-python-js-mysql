@@ -1,0 +1,81 @@
+{%extends "layout.html"%}
+{%block content%}
+  <div>
+
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th class="column1">Apartment ID</th>
+              <th class="column2">Community</th>
+              <th class="column3">Apartment Number</th>
+              <th class="column4">Door Number</th>
+              <th class="column5">Owner Name</th>
+              <th class="column6">Price</th>
+              <th class="column7">Booking Status</th>
+              <th class="column8">Image</th>
+            </tr>
+          </thead>
+          <tbody>
+              {%for items in data %}
+              <tr>
+
+                <td class="column1">{{ items[0] }}</td>
+                <td class="column2">{{ items[1] }}</td>
+                <td class="column3">{{ items[2] }}</td>
+                <td class="column4">{{ items[3] }}</td>
+                <td class="column5">{{ items[4] }}</td>
+                <td class="column6">{{ items[5] }}</td>
+                <td class="column7">{{ items[6] }}</td>
+                <td class="column8">{{ items[7] }}</td>
+
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="newsletter-right">
+          <form id="mc-form2" class="mailing-list cf" method = "post" enctype="multipart/form-data">
+            <input id="mc-email2" type="text" value="" name="apt_id" placeholder="Apartment ID" style = "padding-right:20px" style = "padding-left:20px"placeholder="apt_id"></br>
+            <!--<input id="mc-email2" type="text" value="" name="sid" placeholder="Community" style = "padding-right:20px" style = "padding-left:20px"></br>
+            -->
+<select name="sid" id="community" style="padding-right: 75px; padding-left: 20px;">
+  <option value="" disabled selected>Community</option>
+  {% for society_item in society_data %}
+  <option value="{{ society_item[0] }}">{{ society_item[1] }}</option>
+  {% endfor %}
+</select>
+<br/>
+<!--<input id="mc-email2" type="text" value="" name="apt_detail_code" placeholder="Apartment Detail Code" style = "padding-right:20px" style = "padding-left:20px"></br>
+-->
+<select name="apt_detail_code" id="apt_detail_code" style="padding-right: 25px; padding-left: 20px;">
+  <option value="" disabled selected>Apartment Details</option>
+  {% for aptdetail_item in aptdetail_data %}
+  <option value="{{ aptdetail_item[0] }}">{{ aptdetail_item[1] }}</option>
+  {% endfor %}
+</select>
+<br/>
+ <input id="mc-email2" type="text" value="" name="door_no" placeholder="Door No." style = "padding-right:20px" style = "padding-left:20px"></br>
+            <!--<input id="mc-email2" type="text" value="" name="owner_id" placeholder="Owner Name" style = "padding-right:20px" style = "padding-left:20px"></br>
+           
+              --->
+           <select name="owner_id" id="owner" style="padding-right: 70px; padding-left: 20px;">
+            <option value="" disabled selected>Owner Name</option>
+            {% for owner_item in owner_data %}
+            <option value="{{ owner_item[0] }}">{{ owner_item[1] }}</option>
+            {% endfor %}
+          </select>
+          <br/>
+           <input id="mc-email2" type="text" value="" name="price" placeholder="price" style = "padding-right:20px" style = "padding-left:20px"></br>
+            <label for="image" style="padding-right: 20px;">Upload Apartment Images:</label></br>
+            <input type="file" name="image" id="image" style="padding-right: 20px; padding-left: 20px;">
+            <div class="container" style="padding-top: 50px" >
+               <button type="submit" id="insert" class="btn btn-secondary"  >Add Apartment</button>
+            </div>
+          </form>
+      <div class="container" style="padding-top: 20px" >
+
+         <button type="button" onclick="window.location.href='/'"class="btn btn-secondary"  >Logout</button>
+       </div
+    </div>
+
+  {%endblock%}

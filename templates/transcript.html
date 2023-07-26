@@ -1,0 +1,33 @@
+{%extends "layout.html"%}
+{%block content%}
+  <div>
+
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th class="column1">apt_id</th>
+              <th class="column1">sid</th>
+              <th class="column1">booking_id</th>
+              <th class="column1">uid</th>
+              <th class="column1">booking_date</th>
+            </tr>
+          </thead>
+          <tbody>
+              {%for items in data %}
+              <tr>
+                <td class="column1">{{ items[0] }}</td>
+                <td class="column1">{{ items[1] }}</td>
+                <td class="column1">{{ items[2] }}</td>
+                <td class="column1">{{ items[3] }}</td>
+                <td class="column1">{{ items[4] }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+
+    
+         <button type="button" onclick="window.location.href='/'"class="btn btn-secondary"  >Logout</button>
+       </div
+    </div>
+
+{%endblock%}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Apartment list</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+		.bg-image-full {
+			background: no-repeat center center scroll;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			background-size: cover;
+			-o-background-size: cover;
+
+		}
+
+		.hovereffect {
+			width:100%;
+			height:100%;
+			float:left;
+			overflow:hidden;
+			position:relative;
+			text-align:center;
+			cursor:default;
+		}
+
+		.hovereffect .overlay {
+			width:100%;
+			height:100%;
+			position:absolute;
+			overflow:hidden;
+			top:0;
+			left:0;
+			opacity:0;
+			background-color:rgba(0,0,0,0.5);
+			-webkit-transition:all .4s ease-in-out;
+			transition:all .4s ease-in-out
+		}
+
+		.hovereffect img {
+			display:block;
+			position:relative;
+			-webkit-transition:all .4s linear;
+			transition:all .4s linear;
+		}
+
+		.hovereffect h2 {
+			text-transform:uppercase;
+			color:#fff;
+			text-align:center;
+			position:relative;
+			font-size:17px;
+			background:rgba(0,0,0,0.6);
+			-webkit-transform:translatey(-100px);
+			-ms-transform:translatey(-100px);
+			transform:translatey(-100px);
+			-webkit-transition:all .2s ease-in-out;
+			transition:all .2s ease-in-out;
+			padding:10px;
+		}
+
+		.hovereffect a.info {
+			text-decoration:none;
+			display:inline-block;
+			text-transform:uppercase;
+			color:#fff;
+			border:1px solid #fff;
+			background-color:transparent;
+			opacity:0;
+			filter:alpha(opacity=0);
+			-webkit-transition:all .2s ease-in-out;
+			transition:all .2s ease-in-out;
+			margin:50px 0 0;
+			padding:7px 14px;
+		}
+
+		.hovereffect a.info:hover {
+			box-shadow:0 0 5px #fff;
+		}
+
+		.hovereffect:hover img {
+			-ms-transform:scale(1.2);
+			-webkit-transform:scale(1.2);
+			transform:scale(1.2);
+		}
+
+		.hovereffect:hover .overlay {
+			opacity:1;
+			filter:alpha(opacity=100);
+		}
+
+		.hovereffect:hover h2,.hovereffect:hover a.info {
+			opacity:1;
+			filter:alpha(opacity=100);
+			-ms-transform:translatey(0);
+			-webkit-transform:translatey(0);
+			transform:translatey(0);
+		}
+
+		.hovereffect:hover a.info {
+			-webkit-transition-delay:.2s;
+			transition-delay:.2s;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="container-fluid">
+
+		<!--<div class="position-relative text-center" >
+			<img src="apartment heading.jpg" class="img-fluid" style="height: 450px; width: 100%; ">
+			<div class="carousel-caption my-5">
+				<h1 class="headline" >Some of our apartments(add image underneath)</h1>
+			</div>
+		</div> -->
+
+	    <header class="text-center" >
+	    	<div class="py-5 bg-image-full"  style="background-image: url('apartment heading.jpg'); ">
+	    	<div style="height: 200px;"></div>
+	      	<!--<h1 class="py-5 text-black" style="">Aprtments Around You</h1>-->
+	    </header>
+
+
+		<section class="py-5">
+			<div class="container">
+				<h1>Apartments</h1>
+				<p class="lead">in Bengaluru.</p>
+				<p>Apartments coming soon.</p>
+			</div>
+		</section>
+
+		<!-- https://res.cloudinary.com/g5-assets-cld/image/upload/x_0,y_252,h_1799,w_2999,c_crop/q_auto,f_auto,fl_lossy,g_center,h_1200,w_2000/g5/g5-c-j2uwbrzj-morgan-management-llc/g5-cl-1h5bbly3yt-50-front/uploads/000-R-INT-002-HR_sbldrf.jpg -->
+		<div class="column" style="margin-top: 80px; margin-bottom: 50px;">
+			<div class="col-sm-3 mt-3">
+			<div class="card h-100 shadow hovereffect">
+		  		<img class="card-img-top img-fluid h-50" src="" alt="Card image">
+		  		<div class="card-body">
+		    		<h4  class="card-title building-name">No apartment added yet.</h4>
+		    		<p class="card-text apt-detail"></p>
+		    		<p class="card-text owner"></p>
+		    		<p class="card-text price"></p>
+		    		<a href="#link added in apt-table" class="btn btn-primary"></a>
+		  		</div>
+			</div>
+			</div>
+		</div>
+
+	<!--		<div class="col-sm-3 mt-3">
+			<div class="card h-100 shadow hovereffect" >
+		  		<img class="card-img-top img-fluid h-50" src="image1.jpg" alt="Card image">
+		  		<div class="card-body">
+		    		<h4 class="card-title">SJR Verity</h4>
+		    		<p class="card-text apt-detail">2 BHK, 100 sq.ft,... </p>
+		    		<p class="card-text owner">Shivansh</p>
+		    		<p class="card-text">Rs. 1,48,000</p>
+		    		<a href="#" class="btn btn-primary">Book Now</a>
+		  		</div>
+			</div>
+			</div>
+
+			<div class="col-sm-3 mt-3">
+			<div class="card h-100 shadow hovereffect" >
+		  		<img class="card-img-top img-fluid h-50" src="image2.jpg" alt="Card image">
+		  		<div class="card-body">
+		    		<h4 class="card-title">dhgf</h4>
+		    		<p class="card-text apt-detail">2 BHK, 100 sq.ft,... </p>
+		    		<p class="card-text owner">Shivansh</p>
+		    		<p class="card-text">Rs. 1,48,000</p>
+		    		<a href="#" class="btn btn-primary">Book Now</a>
+		  		</div>
+			</div>
+			</div>
+
+			<div class="col-sm-3 mt-3">
+			<div class="card h-100 shadow hovereffect" >
+		  		<img class="card-img-top img-fluid h-50" src="image3.jpg" alt="Card image">
+		  		<div class="card-body">
+		    		<h4 class="card-title">Home Fiesta</h4>
+		    		<p class="card-text apt-detail">2 BHK, 100 sq.ft,... </p>
+		    		<p class="card-text owner">Shivansh</p>
+		    		<p class="card-text">Rs. 1,48,000</p>
+		    		<a href="#" class="btn btn-primary">Book Now</a>
+		  		</div>
+			</div>
+			</div>
+
+			<div class="col-sm-3 mt-3">
+			<div class="card h-100 shadow hovereffect" >
+		  		<img class="card-img-top img-fluid h-50" src="image4.jpg" alt="Card image">
+		  		<div class="card-body">
+		    		<h4 class="card-title">SJR Verity</h4>
+		    		<p class="card-text apt-detail">2 BHK, 100 sq.ft,... </p>
+		    		<p class="card-text owner">Shivansh</p>
+		    		<p class="card-text">Rs. 1,50,000</p>
+		    		<a href="#" class="btn btn-primary">Book Now</a>
+		  		</div>
+			</div>
+		</div>
+		</div>
+	</div>-->
+</body>
+
+</html>
