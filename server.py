@@ -55,14 +55,18 @@ def apartment():
                 row.append("btn-primary")
             data.append(row)
         return render_template('apartment.html', data=data)
-
-@app.route('/society', methods = ['GET','POST'])
+    
+@app.route('/society', methods=['GET', 'POST'])
 def society():
     cur = mysql.connection.cursor()
     cur.execute('''SELECT * FROM society''')
     data = cur.fetchall()
-    print (data)
-    return render_template('society.html',data=data)
+    print(data)
+    cur.execute('''SELECT * FROM facility''')
+    fac_data = cur.fetchall()
+
+    return render_template('society.html', data=data, fac_data=fac_data)
+
 
 @app.route('/specificapt/<build>',methods =['GET','POST'])
 def specificapt(build):
@@ -335,7 +339,10 @@ def transcript():
     data = cur.fetchall()
     #print data
     return render_template('transcript.html', data = data)
-    
+
+@app.route('/login',methods = ['GET','POST'])
+def login():
+    return render_template('login.html')  
 '''
 @app.route('/authenticate',methods = ['GET','POST'])
 def authenticate():

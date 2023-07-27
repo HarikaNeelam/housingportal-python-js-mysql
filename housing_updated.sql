@@ -42,6 +42,7 @@ INSERT INTO `admin` (`admin_id`, `password`) VALUES
 (1, 'samanyu'),
 (2, 'as');
 
+
 -- --------------------------------------------------------
 
 --
@@ -150,39 +151,35 @@ CREATE TABLE `facility` (
 
 --
 -- Dumping data for table `facility`
+
 --
+drop table facility;
 
 INSERT INTO `facility` (`sid`, `facility`, `image`) VALUES
-(1, '24 hrs Electricity and Water supply', 'https://png.icons8.com/color/50/000000/light-off.png'),
-(1, 'Laundry, Dry Cleaning & Pressing', 'https://png.icons8.com/color/50/000000/cloakroom.png'),
-(1, 'Complimentary Wireless Internet Access', 'https://png.icons8.com/color/50/000000/wifi.png'),
-(1, 'Key Card Security Access', 'https://png.icons8.com/ultraviolet/50/000000/keyhole-shield.png'),
-(1, 'Swimming Pool', 'https://png.icons8.com/color/50/000000/icons8-logo.png'),
-(1, 'Gymnasium', 'https://png.icons8.com/color/50/000000/dumbbell.png'),
-(1, 'In-house Cafe', 'https://png.icons8.com/color/50/000000/restaurant-table.png'),
-(1, 'Tennis Court', 'https://png.icons8.com/ultraviolet/50/000000/tennis.png'),
-(1, 'Jogging Track', 'https://png.icons8.com/color/50/000000/exercise.png'),
-(1, 'Complimentary Parking', 'https://png.icons8.com/color/50/000000/parking.png'),
-(2, '24 hrs Electricity and Water supply', 'https://png.icons8.com/color/50/000000/light-off.png'),
-(2, 'Laundry, Dry Cleaning & Pressing', 'https://png.icons8.com/color/50/000000/cloakroom.png'),
-(2, 'Complimentary Wireless Internet Access', 'https://png.icons8.com/color/50/000000/wifi.png'),
-(2, 'Key Card Security Access', 'https://png.icons8.com/ultraviolet/50/000000/keyhole-shield.png'),
-(2, 'Swimming Pool', 'https://png.icons8.com/color/50/000000/icons8-logo.png'),
-(2, 'Gymnasium', 'https://png.icons8.com/color/50/000000/dumbbell.png'),
-(2, 'In-house Cafe', 'https://png.icons8.com/color/50/000000/restaurant-table.png'),
-(2, 'Tennis Court', 'https://png.icons8.com/ultraviolet/50/000000/tennis.png'),
-(2, 'Jogging Track', 'https://png.icons8.com/color/50/000000/exercise.png'),
-(2, 'Complimentary Parking', 'https://png.icons8.com/color/50/000000/parking.png'),
-(3, '24 hrs Electricity and Water supply', 'https://png.icons8.com/color/50/000000/light-off.png'),
-(3, 'Laundry, Dry Cleaning & Pressing', 'https://png.icons8.com/color/50/000000/cloakroom.png'),
-(3, 'Complimentary Wireless Internet Access', 'https://png.icons8.com/color/50/000000/wifi.png'),
-(3, 'Key Card Security Access', 'https://png.icons8.com/ultraviolet/50/000000/keyhole-shield.png'),
-(3, 'Swimming Pool', 'https://png.icons8.com/color/50/000000/icons8-logo.png'),
-(3, 'Gymnasium', 'https://png.icons8.com/color/50/000000/dumbbell.png'),
-(3, 'In-house Cafe', 'https://png.icons8.com/color/50/000000/restaurant-table.png'),
-(3, 'Tennis Court', 'https://png.icons8.com/ultraviolet/50/000000/tennis.png'),
-(3, 'Jogging Track', 'https://png.icons8.com/color/50/000000/exercise.png'),
-(3, 'Complimentary Parking', 'https://png.icons8.com/color/50/000000/parking.png');
+(1, '24 hrs Water & Electricity', 'https://w7.pngwing.com/pngs/1005/418/png-transparent-russia-gazprom-neft-natural-gas-company-gas-text-logo-world-thumbnail.png'),
+(1, 'Laundry & Dry Cleaning', 'https://t3.ftcdn.net/jpg/04/27/57/28/360_F_427572855_RhQYKzH4mAzkzIYhnGngBA4h4x5kUwnm.jpg'),
+(1, 'Complimentary WiFi', 'https://w7.pngwing.com/pngs/686/190/png-transparent-black-wifi-logo-wi-fi-computer-icons-wifi-symbol-white-computer-network-internet-black-and-white-thumbnail.png'),
+(1, 'Key Card Security Access', 'https://media.istockphoto.com/id/928549262/vector/opening-the-electronic-lock.jpg?s=2048x2048&w=is&k=20&c=T4n1PVTWLRaB4t3625SNksovX8ESokRCwJHZZze82iM='),
+(1, 'Swimming Pool', 'https://media.istockphoto.com/id/874204060/vector/swimming-icon.jpg?s=612x612&w=0&k=20&c=FuqtWI9DhoBRnNXsszshRMWfYwiYVatXb-NoDfQxteA='),
+(1, 'Gymnasium', 'https://uploads-ssl.webflow.com/63695e3c58fff2340c868780/6378b4d9523c296e0f122539_61f39f335c183809d1ca3085_429d631659a11a9eb666b103d811470a.jpeg'),
+(1, 'In-house Cafe', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDbYAEBHTT5cQYfCv1CpQqFCr-Ay1-y50SuOTdJsdWuw&s'),
+(1, 'Tennis Court', 'https://t3.ftcdn.net/jpg/03/19/97/72/240_F_319977248_uFxqK12OD7oG8VEq2DqRSweasxmsg62Q.jpg'),
+(1, 'Jogging Track', 'https://t4.ftcdn.net/jpg/02/74/16/21/360_F_274162164_Oy35v6hOXqs0PRclDSs3OYNhcGzvyrYD.jpg'),
+(1, 'Complimentary Parking', 'https://signcovers.com/wp-content/uploads/2019/10/DSC00894-2.jpg'),
+(2, '24 hrs Water & Electricity', 'https://w7.pngwing.com/pngs/1005/418/png-transparent-russia-gazprom-neft-natural-gas-company-gas-text-logo-world-thumbnail.png'),
+(2, 'Laundry & Dry Cleaning', 'https://t3.ftcdn.net/jpg/04/27/57/28/360_F_427572855_RhQYKzH4mAzkzIYhnGngBA4h4x5kUwnm.jpg'),
+(2, 'Complimentary WiFi', 'https://w7.pngwing.com/pngs/686/190/png-transparent-black-wifi-logo-wi-fi-computer-icons-wifi-symbol-white-computer-network-internet-black-and-white-thumbnail.png'),
+(2, 'Gymnasium', 'https://uploads-ssl.webflow.com/63695e3c58fff2340c868780/6378b4d9523c296e0f122539_61f39f335c183809d1ca3085_429d631659a11a9eb666b103d811470a.jpeg'),
+(2, 'In-house Cafe', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDbYAEBHTT5cQYfCv1CpQqFCr-Ay1-y50SuOTdJsdWuw&s'),
+(2, 'Jogging Track', 'https://t4.ftcdn.net/jpg/02/74/16/21/360_F_274162164_Oy35v6hOXqs0PRclDSs3OYNhcGzvyrYD.jpg'),
+(2, 'Complimentary Parking', 'https://signcovers.com/wp-content/uploads/2019/10/DSC00894-2.jpg'),
+(3, '24 hrs Water & Electricity', 'https://w7.pngwing.com/pngs/1005/418/png-transparent-russia-gazprom-neft-natural-gas-company-gas-text-logo-world-thumbnail.png'),
+(3, 'Laundry & Dry Cleaning', 'https://t3.ftcdn.net/jpg/04/27/57/28/360_F_427572855_RhQYKzH4mAzkzIYhnGngBA4h4x5kUwnm.jpg'),
+(3, 'Complimentary WiFi', 'https://w7.pngwing.com/pngs/686/190/png-transparent-black-wifi-logo-wi-fi-computer-icons-wifi-symbol-white-computer-network-internet-black-and-white-thumbnail.png'),
+(3, 'Key Card Security Access', 'https://media.istockphoto.com/id/1056299634/vector/hand-holding-identification-card-line-icon.jpg?s=612x612&w=0&k=20&c=9XzEVJqNjo0-VfVPeer6JtmmJMFVArjpMCx1ohqoklM='),
+(3, 'Swimming Pool', 'https://media.istockphoto.com/id/874204060/vector/swimming-icon.jpg?s=612x612&w=0&k=20&c=FuqtWI9DhoBRnNXsszshRMWfYwiYVatXb-NoDfQxteA='),
+(3, 'Gymnasium', 'https://uploads-ssl.webflow.com/63695e3c58fff2340c868780/6378b4d9523c296e0f122539_61f39f335c183809d1ca3085_429d631659a11a9eb666b103d811470a.jpeg'),
+(3, 'Tennis Court', 'https://t3.ftcdn.net/jpg/03/19/97/72/240_F_319977248_uFxqK12OD7oG8VEq2DqRSweasxmsg62Q.jpg');
 
 -- --------------------------------------------------------
 
@@ -226,10 +223,13 @@ CREATE TABLE `society` (
 --
 
 INSERT INTO `society` (`sid`, `name`, `address`, `mgr_per_id`, `img`) VALUES
-(1, 'SJR Verity', 'Konapanna Agrahara, Hosa Road, Bangalore-76', 1, 'society1.jpg'),
-(2, 'Petal Flower', 'Near Bellandur, off Sarjapur Road, Bangalore-72', 2, 'society2.jpg'),
-(3, 'Home Fiesta', 'Hosa Junction, near Electronic City, Bangalore-75', 3, 'society3.jpg');
+(1, 'Idle Wild', '13th St S , Birmingham, Alabama-35208', 1, 'society1.jpg'),
+(2, 'Elements 60', '14th St S, 1320, Birmingham, Alabama-35208', 2, 'society2.jpg'),
+(3, 'Melrose', '17th St S, Near UAB campus, Birmingham , Alabama-35205 ', 3, 'society3.jpg'),
+(4, 'Lennox', '13th St S, Near  Sterne Library, Birmingham , Alabama-35205', 3, 'society_lennox.jpg');
 
+
+update society set name ='Lennox' , address ='13th St S, Near  Sterne Library, Birmingham , Alabama-35205' where sid=1;
 -- --------------------------------------------------------
 
 --
