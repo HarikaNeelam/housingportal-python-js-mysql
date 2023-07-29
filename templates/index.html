@@ -2,138 +2,164 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-<title>Apartments Purchase System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Birmingham Homes - Admin Login</title>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-{% block body %}{% endblock %}
+<style>
+  /* General Styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
 
-<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/0b09af0a-7a35-4e17-b025-0b5bc2733af4.css"/>
+  h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0;
+  }
 
-		<style type="text/css">
-img.wp-smiley,
-img.emoji {
-	display: inline !important;
-	border: none !important;
-	box-shadow: none !important;
-	height: 1em !important;
-	width: 1em !important;
-	margin: 0 .07em !important;
-	vertical-align: -0.1em !important;
-	background: none !important;
-	padding: 0 !important;
-}
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* Header Styles */
+  header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
+
+  header h1 {
+    font-size: 32px;
+  }
+
+  header p {
+    font-size: 16px;
+  }
+
+  /* Main Content Styles */
+  #content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the login form */
+    margin-top: 20px;
+  }
+
+  .image-container {
+    width: 300px; /* Set the desired width for the images */
+    height: 200px; /* Set the desired height for the images */
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .image-link h4 {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #fff;
+    font-size: 16px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Login Form Styles */
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .login-form h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Navigation Styles */
+  nav {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  nav a:hover {
+    background-color: #555;
+  }
 </style>
-<link rel='stylesheet' id='font-awesome-css'  href='http://minimums.com/wp-content/themes/ink-modified-2/assets/css/font-awesome.css?ver=4.1.0' type='text/css' media='all' />
-<link rel='stylesheet' id='stag-shortcode-styles-css'  href='http://minimums.com/wp-content/plugins/stagtools/assets/css/stag-shortcodes.css?ver=2.0.1' type='text/css' media='all' />
-<link rel='stylesheet' id='stag-google-fonts-css'  href='http://fonts.googleapis.com/css?family=Montserrat%3Aregular%2C700&#038;subset=latin%2Clatin&#038;ver=1.3.3' type='text/css' media='all' />
-<link rel='stylesheet' id='stag-style-css'  href='http://minimums.com/wp-content/themes/ink-modified-2/style.css?ver=123456789' type='text/css' media='all' />
-<link rel='stylesheet' id='jetpack_css-css'  href='http://minimums.com/wp-content/plugins/jetpack/css/jetpack.css?ver=3.7.2' type='text/css' media='all' />
 
 </head>
-<body class="home blog chrome header-over stagtools" data-layout="1-2-2-2">
+<body>
 
-<div id="page" class="hfeed site">
+<header>
+  <h1>Birmingham Homes</h1>
+  <p>If you are Admin, login here.</p>
+</header>
 
-	<div id="content" class="site-content">
-
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
-
-
-
-<!-- THIS IS APARTMENT -->
-<article id="post-6949" class="post-6949 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized post-grid container">
-
-	<style type="text/css">
-		.post-6949 { background-color: #000000 !important; }
-		.post-cover-6949 { background-image: url(https://4.bp.blogspot.com/-8Nk3QmBPK1c/VdIX97lzyOI/AAAAAAABxhs/HdoX0_JkBSI/s0/Manhattan_Sunset_wallpaper.jpg); opacity: 0.9; }
-	</style>
-	<div class="post-cover post-cover-6949 stag-image--none"></div>
-
-	<div class="post-content">
-		<header class="entry-header">
-			<h1 class="entry-title">
-				<a href="apartment" rel="bookmark">Apartments.</a>
-			</h1>
-			<h2 class="subtitle">Come on in, check us out.</h2>
-
-		</header>
-
-			<!--<footer class="entry-meta">
-			<span class="posted-on"><a href="http://minimums.com/ari-meisel/" title="5:00 am" rel="bookmark"><time class="entry-date published" datetime="2017-04-05T05:00:38+00:00">April 5, 2017</time><time class="updated" datetime="2017-04-06T17:00:12+00:00">April 6, 2017</time></a></span><span class="reading-time">5 minute read</span><span class="byline">by <span class="author vcard"><a class="url fn n" href="http://minimums.com/author/alan/">alan</a></span></span>					</footer> --><!-- .entry-meta -->
-	</div>
-</article>
-
-
-
-<!-- Society part -->
-<article id="post-6606" class="post-6606 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized post-grid container" style="width: 100%;">
-
-	<style type="text/css">
-		.post-6606 { background-color: #000000 !important; }
-		.post-cover-6606 { background-image: url(https://i.pinimg.com/originals/b9/2e/6b/b92e6b9d26ce0e519866ff4e71d9d924.jpg); opacity: 0.9;}
-	</style>
-
-	<div class="post-cover post-cover-6606 stag-image--none"></div>
-
-	<div class="post-content">
-		<header class="entry-header">
-			<h1 class="entry-title">
-				<a href="society" rel="bookmark">Society.</a>
-			</h1>
-			<h2 class="subtitle">Click here to book your dream home.</h2>
-
-		</header>
-
-        	<!--<footer class="entry-meta">
-			<span class="posted-on"><a href="http://minimums.com/gaurav-nanda/" title="5:00 am" rel="bookmark"><time class="entry-date published" datetime="2017-03-22T05:00:07+00:00">March 22, 2017</time><time class="updated" datetime="2017-03-19T22:46:04+00:00">March 19, 2017</time></a></span><span class="reading-time">4 minute read</span><span class="byline">by <span class="author vcard"><a class="url fn n" href="http://minimums.com/author/alan/">alan</a></span></span>					</footer> --><!-- .entry-meta -->
-
-
-	</div>
-</article>
-
-			</div>
-</article>
-
-
-
-
-
-
-</div><!-- #primary -->
-	<div class="newsletter cf">
-  <div class="width">
-    <div class="newsletter-left">
-      <h3>Administrator Login.</h3>
-      <p>For office personel only.</p>
+<div id="content" class="container">
+  <!-- Apartment Image -->
+  <a href="apartment" class="image-link">
+    <div class="image-container" style="background-image: url('https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg');">
+      <h4>Click here to view apartments</h4>
     </div>
-    <div class="newsletter-right">
+  </a>
 
-      <form id="mc-form2" class="mailing-list cf" method = "post">
-        <input id="mc-email2" type="text" value="" name="id" placeholder="Admin ID" style="text-transform:lowercase;">
-
-         <input id="mc-password" type="password" value="" name="password" placeholder="password" style="text-transform:lowercase;">
-         <button type="submit"><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39 36"><path d="M37.263,20.387 C37.263,20.387 23.438,34.214 23.438,34.214 C22.689,34.964 21.706,35.339 20.724,35.339 C19.741,35.339 18.758,34.964 18.008,34.214 C16.509,32.714 16.509,30.282 18.008,28.781 C18.008,28.781 25.276,21.512 25.276,21.512 C25.276,21.512 3.791,21.512 3.791,21.512 C1.690,21.512 -0.012,19.792 -0.012,17.670 C-0.012,15.549 1.690,13.829 3.791,13.829 C3.791,13.829 25.277,13.829 25.277,13.829 C25.277,13.829 18.008,6.559 18.008,6.559 C16.509,5.059 16.509,2.627 18.008,1.127 C19.508,-0.373 21.939,-0.373 23.439,1.127 C23.439,1.127 37.263,14.954 37.263,14.954 C37.983,15.675 38.387,16.652 38.387,17.670 C38.387,18.689 37.983,19.666 37.263,20.387 Z" /></svg></button>
-       <label for="mc-email2"></label>
-      </form>
-    </div>
+  <!-- Login Form -->
+  <div class="login-form">
+    <h2>Administrator Login</h2>
+    <p>For office personnel only.</p>
+    <form id="login-form" method="post">
+      <input type="text" name="admin_username" placeholder="Admin User Name" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
   </div>
+
+  <!-- Community Image -->
+  <a href="communities" class="image-link">
+    <div class="image-container" style="background-image: url('https://images.freeimages.com/images/large-previews/a47/old-tudor-apartment-building-1-1224189.jpg');">
+      <h4>Click here to view communities</h4>
+    </div>
+  </a>
 </div>
 
-
-
-
-
-
-		</main><!-- #main -->
 </body>
 </html>

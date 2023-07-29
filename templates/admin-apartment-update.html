@@ -1,0 +1,94 @@
+{%extends "layout.html"%}
+{%block content%}
+
+<style type="text/CSS">
+  
+.not-available {
+  color: red;
+}
+
+.available {
+  color: green;
+}
+</style>
+  <div>
+
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th class="column1">Apartment ID</th>
+              <th class="column1">Door Number</th>
+              <th class="column2">Community</th>
+              <th class="column5">Owner</th>
+              <th class="column7">Booking Status</th>
+            </tr>
+          </thead>
+          <tbody>
+              {%for items in data %}
+              <tr>
+
+                <td class="column1">{{ items[0] }}</td>
+                <td class="column2">{{ items[1] }}</td>
+                <td class="column2">{{ items[2] }}</td>
+                <td class="column3">{{ items[3] }}</td>
+                <!--<td class="column4">{{ items[3] }}</td>-->
+                <td class="column4 {% if items[4] == 'n' %}not-available{% else %}available{% endif %}">
+                  {% if items[4] == 'n' %}
+                      Not available
+                  {% else %}
+                      Available
+                  {% endif %}
+              </td>
+
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="newsletter-right">
+          <form id="mc-form2" class="mailing-list cf" method="post">
+              <!-- Dropdown for Apartment ID -->
+              <select name="apt_id" id="apt_id" style="padding-right: 20px; padding-left: 20px;">
+                  <option value="" disabled selected>Select Apartment ID</option>
+                  {% for item in data %}
+                  <option value="{{ item[0] }}">{{ item[0] }}</option>
+                  {% endfor %}
+              </select>
+              <br>
+  
+              <!-- Dropdown for Community -->
+              <select name="sid" id="community" style="padding-right: 20px; padding-left: 20px;">
+                  <option value="" disabled selected>Select Community</option>
+                  {% for society_item in society_data %}
+                  <option value="{{ society_item[0] }}">{{ society_item[1] }}</option>
+                  {% endfor %}
+              </select>
+              <br>
+  
+              <!-- Dropdown for Owner -->
+              <select name="owner_id" id="owner" style="padding-right: 20px; padding-left: 20px;">
+                  <option value="" disabled selected>Select Owner</option>
+                  {% for owner_item in owner_data %}
+                  <option value="{{ owner_item[0] }}">{{ owner_item[1] }}</option>
+                  {% endfor %}
+              </select>
+              <br>
+  
+              <!-- Dropdown for New Status -->
+              <select name="status" id="status" style="padding-right: 20px; padding-left: 20px;">
+                  <option value="" disabled selected>Select New Status</option>
+                  <option value="n">Not available</option>
+                  <option value="a">Available</option>
+              </select>
+              <br>
+  
+   <button type="submit" id="insert" class="btn btn-secondary" >Update</button>
+            </div>
+          </form>
+      <div class="container" style="padding-top: 20px" >
+
+         <button type="button" onclick="window.location.href='/'"class="btn btn-secondary"  >Logout</button>
+       </div
+    </div>
+
+  {%endblock%}

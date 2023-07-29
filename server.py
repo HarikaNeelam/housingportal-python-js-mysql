@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, url_for, flash, redirect
 from flask_mysqldb import MySQL
 from random import randint
 import traceback,os
+from collections import defaultdict
+
 
 app = Flask(__name__)
 app.secret_key = 'my unobvious secret key'
@@ -17,10 +19,10 @@ mysql = MySQL(app)
 @app.route('/',methods = ['GET','POST'])
 def home():
     if request.method == 'POST':
-        id = request.form['id']
+        username = request.form['admin_username']
         password = request.form['password']
         cur = mysql.connection.cursor()
-        cur.execute('''SELECT * FROM admin WHERE (admin_id, password) = (%s,%s)''',(id,password))
+        cur.execute('''SELECT * FROM admin WHERE (admin_username, password) = (%s,%s)''',(username,password))
         n = cur.fetchall()
         if len(n)!=0:
             print (n)
@@ -56,50 +58,58 @@ def apartment():
             data.append(row)
         return render_template('apartment.html', data=data)
     
-@app.route('/society', methods=['GET', 'POST'])
-def society():
+@app.route('/communities', methods=['GET', 'POST'])
+def communities():
     cur = mysql.connection.cursor()
     cur.execute('''SELECT * FROM society''')
     data = cur.fetchall()
     print(data)
-    cur.execute('''SELECT * FROM facility''')
-    fac_data = cur.fetchall()
 
-    return render_template('society.html', data=data, fac_data=fac_data)
+    return render_template('communities.html', data=data)
 
 
-@app.route('/specificapt/<build>',methods =['GET','POST'])
+@app.route('/specificapt/<build>', methods=['GET', 'POST'])
 def specificapt(build):
     data = []
-    sid = build;
-    cur = mysql.connection.cursor();
+    sid = build
+    cur = mysql.connection.cursor()
 
-   #have to fix items index in html
-
-    cur.execute('''select apt_id, doorno, price, status, a.img, bhk, bathroom, size, p.name, phone, s.name 
-        from apartment a, apt_detail a1, person p, society s 
-        where a.apt_detail_code=a1.apt_detail_code and p.per_id = a.owner_per_id and s.sid=a.sid and a.sid = %s''',(sid))
+    # Fetch apartment details and facility data
+    cur.execute('''SELECT apt_id, doorno, price, status, a.img, bhk, bathroom, size, p.name, phone, s.name 
+        FROM apartment a, apt_detail a1, person p, society s 
+        WHERE a.apt_detail_code=a1.apt_detail_code AND p.per_id = a.owner_per_id AND s.sid=a.sid AND a.sid = %s''', (sid,))
     rows = cur.fetchall()
-    cur.execute('''SELECT facility, image from facility where sid=%s''', (sid,))
+
+    cur.execute('''SELECT facility, image FROM facility WHERE sid=%s''', (sid,))
     fac_data = cur.fetchall()
-    #print fac_data
+
+    # Process apartment data
     for row in rows:
         row = list(row)
-        if(row[3] == "n"):
+        if row[3] == "n":
             row[3] = "none"
             row.append("bg-light text-secondary")
         else:
             row[3] = "auto"
             row.append("btn-primary")
         data.append(row)
-    return render_template('specific-apt.html',data = data, fac_data=fac_data)
+
+    # Check if there are no apartments found
+    no_apartments = len(data) == 0
+    if no_apartments:
+       cur = mysql.connection.cursor()
+       cur.execute('''SELECT name FROM society WHERE sid=%s''', (sid))
+       blank_apartment = cur.fetchall()
+       print(blank_apartment)
+    return render_template('specific-apt.html', data=data, fac_data=fac_data, no_apartments=no_apartments,blank_apartment=blank_apartment )
+
 
 @app.route('/addapt', methods=['GET', 'POST'])
 def addapt():
     try:
         if request.method == 'POST':
             apt_id = request.form['apt_id']
-            sid = request.form['sid']  # Changed from 'bid' to 'sid'
+            sid = request.form['sid']
             apt_detail_code = request.form['apt_detail_code']
             door_no = request.form['door_no']
             owner = request.form['owner_id']
@@ -125,7 +135,11 @@ def addapt():
         print(traceback.print_exc())
 
     cur = mysql.connection.cursor()
-    cur.execute('''SELECT * FROM apartment''')
+    cur.execute('''SELECT apt.apt_id, soc.name, ad.description, apt.doorno, per.name, apt.price, apt.status, apt.img 
+                   FROM apartment apt
+                   LEFT JOIN society soc ON apt.sid = soc.sid
+                   LEFT JOIN apt_detail ad ON apt.apt_detail_code = ad.apt_detail_code
+                   LEFT JOIN person per ON apt.owner_per_id = per.per_id''')
     data = cur.fetchall()
 
     # Fetch data for the "society" table to populate the dropdown list
@@ -145,10 +159,10 @@ def addapt():
 def addadmin():
      try:
          if request.method == 'POST':
-             admin_id = request.form['admin_id']
+             username = request.form['admin_username']
              password = request.form['password']
              cur = mysql.connection.cursor()
-             cur.execute('''INSERT INTO admin(admin_id,password) VALUES (%s,%s)''',(admin_id,password))
+             cur.execute('''INSERT INTO admin(admin_username,password) VALUES (%s,%s)''',(username,password))
              mysql.connection.commit()
      except:
          print ('bad')
@@ -175,28 +189,41 @@ def deladmin():
     data = cur.fetchall()
     return render_template('admin-add.html', data = data)
 
-#Facilites
-@app.route('/addfacilites', methods = ['GET','POST'])
-def addfacilites():
+@app.route('/addfacilities', methods=['GET', 'POST'])
+def addfacilities():
     try:
         if request.method == 'POST':
             sid = request.form['bid']
             fac = request.form['fac']
-            #print sid, fac
             cur = mysql.connection.cursor()
-            cur.execute('''INSERT into facility(sid,facility) VALUES (%s,%s)''',(sid,fac))
+            cur.execute('''INSERT INTO facility(sid, facility) VALUES (%s, %s)''', (sid, fac))
             mysql.connection.commit()
     except:
-        print ('bad')
-        #print sid
+        print('bad')
+
     cur = mysql.connection.cursor()
-    cur.execute('''SELECT * FROM facility''')
-    data = cur.fetchall()
-    return render_template('facilities-admin.html', data = data)
+    cur.execute('''SELECT s.name, f.facility 
+                    FROM facility f 
+                    JOIN society s 
+                    ON s.sid = f.sid''')
+    query_result = cur.fetchall()
+
+    data = {}
+    for community, facility in query_result:
+        if community in data:
+            data[community].append(facility)
+        else:
+            data[community] = [facility]
 
 
-@app.route('/addsociety', methods=['POST','GET'])
-def addsociety():
+    cur.execute('''SELECT sid, name FROM society''')
+    society_list = cur.fetchall()
+
+    return render_template('admin-facilities-insert.html', data=data.items(), society_list=society_list)
+
+
+@app.route('/communityadd', methods=['POST','GET'])
+def communityadd():
     if request.method == 'POST':
         sid = request.form['bid']
         name = request.form['name']
@@ -215,26 +242,42 @@ def addsociety():
             print ('bad')
             print (sid)
     cur = mysql.connection.cursor()
-    cur.execute('''SELECT * FROM society''')
+    cur.execute('''SELECT s.sid, s.name, s.address, p.name 
+                   FROM society s
+                   JOIN person p ON s.mgr_per_id = p.per_id''')
     data = cur.fetchall()
-    return render_template('admin-society-insert.html', data = data)
 
-@app.route('/buildingupdate',methods = ['GET','POST'])
-def buildingupdate():
-        try:
-            if request.method == 'POST':
-                sid = request.form['bid']
-                mgr = request.form['mgr_per_id']
-                cur = mysql.connection.cursor()
-                cur.execute('''UPDATE society SET mgr_per_id = %s where sid = %s''',(mgr,sid))
-                mysql.connection.commit()
-        except:
-            print ('bad')
-            #print sid,mgr
-        cur = mysql.connection.cursor()
-        cur.execute('''SELECT * FROM society''')
-        data = cur.fetchall()
-        return render_template('building-update.html', data = data)
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT per_id, name FROM person''')
+    persons = cur.fetchall()
+
+    return render_template('admin-community-insert.html', data = data, persons=persons)
+
+
+@app.route('/communityupdate', methods=['GET', 'POST'])
+def communityupdate():
+    try:
+        if request.method == 'POST':
+            sid = request.form['bid']
+            mgr = request.form['mgr_per_id']
+            cur = mysql.connection.cursor()
+            cur.execute('''UPDATE society SET mgr_per_id = %s WHERE sid = %s''', (mgr, sid))
+            mysql.connection.commit()
+    except:
+        print('bad')
+        # print sid, mgr
+
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT per_id, name FROM person''')
+    persons = cur.fetchall()
+
+    cur.execute('''SELECT s.sid, s.name, s.address, p.name 
+                   FROM society s
+                   JOIN person p ON s.mgr_per_id = p.per_id''')
+    data = cur.fetchall()
+    
+    return render_template('admin-comunity-update.html', data=data, persons=persons)
+
 
 @app.route('/addperson', methods=['POST','GET'])
 def addperson():
@@ -335,7 +378,10 @@ def adddetails():
 @app.route('/transcript')
 def transcript():
     cur = mysql.connection.cursor()
-    cur.execute('''SELECT * FROM apt_book''')
+    cur.execute('''SELECT a.doorno,s.name,ab.booking_id,u.name, ab.book_date FROM apt_book ab
+                JOIN user u ON u.uid=ab.uid
+                JOIN society s ON s.sid= ab.sid
+                JOIN apartment a ON a.apt_id = ab.apt_id''')
     data = cur.fetchall()
     #print data
     return render_template('transcript.html', data = data)
@@ -368,26 +414,38 @@ def authenticate():
     return render_template('approve.html',data = data)
 '''
 
-@app.route('/updapt',methods = ['GET','POST'])
+@app.route('/updapt', methods=['GET', 'POST'])
 def updapt():
-        try:
-            if request.method == 'POST':
-                apt_id = request.form['apt_id']
-                status = request.form['status']
-                sid = request.form['sid']
-                owner_id = request.form['owner_id']
-                cur = mysql.connection.cursor()
-                cur.execute('''UPDATE apartment SET sid=%s, owner_per_id=%s, status = %s 
-                	where apt_id = %s''',(sid, owner_id, status, apt_id))
-                mysql.connection.commit() 
-        except:
-            print ('bad')
-            print (traceback.print_exc())
-            #print sid,mgr
-        cur = mysql.connection.cursor()
-        cur.execute('''SELECT apt_id,sid,owner_per_id,status FROM apartment''')
-        data = cur.fetchall()
-        return render_template('update-admin-apartment.html', data = data)
+    try:
+        if request.method == 'POST':
+            apt_id = request.form['apt_id']
+            status = request.form['status']
+            sid = request.form['sid']
+            owner_id = request.form['owner_id']
+            cur = mysql.connection.cursor()
+            cur.execute('''UPDATE apartment SET sid=%s, owner_per_id=%s, status = %s 
+                            WHERE apt_id = %s''', (sid, owner_id, status, apt_id))
+            mysql.connection.commit()
+    except:
+        print('bad')
+        print(traceback.print_exc())
+
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT apt.apt_id,apt.doorno, soc.name, per.name, apt.status 
+                   FROM apartment apt
+                   LEFT JOIN society soc ON apt.sid = soc.sid
+                   LEFT JOIN person per ON apt.owner_per_id = per.per_id''')
+    data = cur.fetchall()
+
+    # Fetch data for the "society" table to populate the dropdown list
+    cur.execute('''SELECT sid, name FROM society''')
+    society_data = cur.fetchall()
+    # Fetch data for the "person" table to populate the dropdown list
+    cur.execute('''SELECT per_id, name FROM person''')
+    owner_data = cur.fetchall()
+
+    return render_template('admin-apartment-update.html', data=data, society_data=society_data, owner_data=owner_data)
+
     
 if __name__ == '__main__':
     app.run(debug = True)

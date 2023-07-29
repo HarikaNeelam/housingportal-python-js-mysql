@@ -5,13 +5,15 @@
         <table class="table table-hover">
           <thead class="thead-dark">
             <tr>
-              <th class="column1">admin_id</th>
+              <th class="column1">Admin ID</th>
+              <th class="column1">Admin User Name</th>
             </tr>
           </thead>
           <tbody>
               {%for items in data %}
               <tr>
                 <td class="column1">{{ items[0] }}</td>
+                <td class="column1">{{ items[1] }}</td>
               </tr>
               {% endfor %}
           </tbody>
@@ -19,11 +21,11 @@
 
         <div class="newsletter-right">
           <form id="mc-form2" class="mailing-list cf" method = "post">
-            <input id="mc-email2" type="text" value="" name="admin_id" style = "padding-right:20px" style = "padding-left:20px"placeholder="admin_id">
-            <input id="mc-email2" type="text" value="" name="password" placeholder="password" style = "padding-right:20px" style = "padding-left:20px">
+            <input id="mc-email2" type="text" value="" name="admin_username" style = "padding-right:20px" style = "padding-left:20px"placeholder="Admin User Name"><br>
+            <input id="mc-email2" type="text" value="" name="password" placeholder="Password" style = "padding-right:20px" style = "padding-left:20px"><br>
             <div class="container" style="padding-top: 50px" >
                <!--<button type="submit" onclick="window.location.href='deladmin' id="delete" class="btn btn-secondary">Delete Admin</button>-->
-               <button type="submit" onclick="window.location.href='addadmin' id="add" class="btn btn-secondary">Add Admin</button>
+               <button type="submit"  id="add" class="btn btn-secondary">Add Admin</button>
             </div>
           </form>
       <div class="container" style="padding-top: 20px" >

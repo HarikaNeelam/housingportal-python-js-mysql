@@ -1,0 +1,48 @@
+{%extends "layout.html"%}
+{%block content%}
+  <div>
+
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th class="column1">Community ID</th>
+              <th class="column2">Community Name</th>
+              <th class="column3">Address</th>
+              <th class="column4">Manager</th>
+            </tr>
+          </thead>
+          <tbody>
+              {%for items in data %}
+              <tr>
+                <td class="column1">{{ items[0] }}</td>
+                <td class="column2">{{ items[1] }}</td>
+                <td class="column3">{{ items[2] }}</td>
+                <td class="column4">{{ items[3] }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="newsletter-right">
+          <form id="mc-form2" class="mailing-list cf" method = "post">
+            <input id="mc-email2" type="text" value="" name="bid" placeholder="Community ID" style = "padding-right:20px" style = "padding-left:20px"placeholder="bid"></br>
+            <!--<input id="mc-email2" type="text" value="" name="mgr_per_id" placeholder="New Manager" style = "padding-right:20px" style = "padding-left:20px"></br>
+            -->
+            <select id="mc-email2" name="mgr_per_id" style="padding-right: 20px; padding-left: 20px" required>
+              <!-- Loop through the 'persons' list to populate the dropdown options -->
+              <option value="" disabled selected>Select New Manager</option>
+              {% for person in persons %}
+                  <option value="{{ person[0] }}">{{ person[1] }}</option>
+              {% endfor %}
+          </select><br>
+            <div class="container" style="padding-top: 50px" >
+               <button type="submit" id="insert" class="btn btn-secondary"  >Update</button>
+            </div>
+          </form>
+      <div class="container" style="padding-top: 20px" >
+
+         <button type="button" onclick="window.location.href='home'"class="btn btn-secondary"  >Logout</button>
+       </div
+    </div>
+
+  {%endblock%}

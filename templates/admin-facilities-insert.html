@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+<div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="column1">Community</th>
+                <th class="column2">Facilities</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for community, facilities in data %}
+            <tr>
+                <td class="column1">{{ community }}</td>
+                <td class="column2">
+                    {% for fac in facilities %}
+                    {{ loop.index }}) {{ fac }}<br>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="newsletter-right">
+        <form id="mc-form2" class="mailing-list cf" method="post">
+            <!--<input id="mc-email2" type="text" value="" name="bid" style="padding-right:20px; padding-left:20px"
+                placeholder="Community">-->
+                <select name="bid" style="padding-right:20px; padding-left:20px">
+                  <option value="" disabled selected>Community</option>
+                  {% for society in society_list %}
+                  <option value="{{ society[0] }}">{{ society[1] }}</option>
+                  {% endfor %}
+              </select>
+            <input id="mc-email2" type="text" value="" name="fac" placeholder="New Facility"
+                style="padding-right:20px; padding-left:20px">
+            <div class="container" style="padding-top: 50px">
+                <button type="submit" id="insert" class="btn btn-secondary">Add facility</button>
+            </div>
+        </form>
+        <div class="container" style="padding-top: 20px">
+            <button type="button" onclick="window.location.href='/'" class="btn btn-secondary">Logout</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

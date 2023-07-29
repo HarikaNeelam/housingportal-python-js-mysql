@@ -29,19 +29,25 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `admin_id` int(5) NOT NULL,
+  `admin_id` int(5) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  `admin_username` varchar(20) NOT NULL,
   `password` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+drop table admin;
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `password`) VALUES
-(0, ''),
-(1, 'samanyu'),
-(2, 'as');
+INSERT INTO `admin` (`admin_username`, `password`) VALUES
+('Alok', 'alok'),
+('Harika', 'harika'),
+('Nishita', 'nishita'),
+('Varshini', 'varshini'),
+('Eppa', 'eppa'),
+('Hemanth','hemanth');
 
+select * from admin;
 
 -- --------------------------------------------------------
 
@@ -134,7 +140,6 @@ INSERT INTO `apt_detail` (`apt_detail_code`, `bhk`, `bathroom`, `size`, `descrip
 ('adc5', 2, 1, 1900, '1 hall, 2 bed , 1 bath');
 
 
-update apt_detail set description='1 hall, 2 bed, 1 bath' where apt_detail_code='adc5';
 
 
 -- --------------------------------------------------------
@@ -153,7 +158,6 @@ CREATE TABLE `facility` (
 -- Dumping data for table `facility`
 
 --
-drop table facility;
 
 INSERT INTO `facility` (`sid`, `facility`, `image`) VALUES
 (1, '24 hrs Water & Electricity', 'https://w7.pngwing.com/pngs/1005/418/png-transparent-russia-gazprom-neft-natural-gas-company-gas-text-logo-world-thumbnail.png'),
@@ -182,7 +186,6 @@ INSERT INTO `facility` (`sid`, `facility`, `image`) VALUES
 (3, 'Tennis Court', 'https://t3.ftcdn.net/jpg/03/19/97/72/240_F_319977248_uFxqK12OD7oG8VEq2DqRSweasxmsg62Q.jpg');
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `person`
 --
@@ -229,7 +232,6 @@ INSERT INTO `society` (`sid`, `name`, `address`, `mgr_per_id`, `img`) VALUES
 (4, 'Lennox', '13th St S, Near  Sterne Library, Birmingham , Alabama-35205', 3, 'society_lennox.jpg');
 
 
-update society set name ='Lennox' , address ='13th St S, Near  Sterne Library, Birmingham , Alabama-35205' where sid=1;
 -- --------------------------------------------------------
 
 --
@@ -346,7 +348,7 @@ ALTER TABLE `user`
 --
 ALTER TABLE `apartment`
   ADD CONSTRAINT `apartment_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `society` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `apartment_ibfk_2` FOREIGN KEY (`owner_per_id`) REFERENCES `personpersonperson` (`per_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `apartment_ibfk_2` FOREIGN KEY (`owner_per_id`) REFERENCES `person` (`per_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `apartment_ibfk_3` FOREIGN KEY (`apt_detail_code`) REFERENCES `apt_detail` (`apt_detail_code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

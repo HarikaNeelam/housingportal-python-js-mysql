@@ -1,5 +1,16 @@
 {%extends "layout.html"%}
 {%block content%}
+
+<style type="text/CSS">
+  
+  .not-available {
+    color: red;
+  }
+  
+  .available {
+    color: green;
+  }
+  </style>
   <div>
 
         <table class="table table-hover">
@@ -7,10 +18,10 @@
             <tr>
               <th class="column1">Apartment ID</th>
               <th class="column2">Community</th>
-              <th class="column3">Apartment Number</th>
+              <th class="column3">Apartment Details</th>
               <th class="column4">Door Number</th>
               <th class="column5">Owner Name</th>
-              <th class="column6">Price</th>
+              <th class="column6">Price(USD)</th>
               <th class="column7">Booking Status</th>
               <th class="column8">Image</th>
             </tr>
@@ -25,7 +36,14 @@
                 <td class="column4">{{ items[3] }}</td>
                 <td class="column5">{{ items[4] }}</td>
                 <td class="column6">{{ items[5] }}</td>
-                <td class="column7">{{ items[6] }}</td>
+                <!--<td class="column7">{{ items[6] }}</td>-->
+                  <td class="column7 {% if items[6] == 'n' %}not-available{% else %}available{% endif %}">
+                    {% if items[6] == 'n' %}
+                    Not available
+                  {% else %}
+                      Available
+                  {% endif %}
+              </td>
                 <td class="column8">{{ items[7] }}</td>
 
               </tr>
