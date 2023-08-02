@@ -93,8 +93,9 @@ def specificapt(build):
             row[3] = "auto"
             row.append("btn-primary")
         data.append(row)
-
+   
     # Check if there are no apartments found
+    blank_apartment = [[' ']]
     no_apartments = len(data) == 0
     if no_apartments:
        cur = mysql.connection.cursor()

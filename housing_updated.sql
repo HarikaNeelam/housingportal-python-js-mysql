@@ -34,7 +34,6 @@ CREATE TABLE `admin` (
   `password` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-drop table admin;
 --
 -- Dumping data for table `admin`
 --
@@ -46,6 +45,7 @@ INSERT INTO `admin` (`admin_username`, `password`) VALUES
 ('Varshini', 'varshini'),
 ('Eppa', 'eppa'),
 ('Hemanth','hemanth');
+
 
 select * from admin;
 
@@ -76,7 +76,6 @@ INSERT INTO `apartment` (`apt_id`, `sid`, `apt_detail_code`, `doorno`, `owner_pe
 ('A003', 1, 'adc1', 'A15', 3, 17800, 'y', 'image2.jpg'),
 ('A004', 2, 'adc3', 'A09', 2, 19800, 'y', 'image3.jpg'),
 ('A005', 3, 'adc4', 'A22', 4, 18600, 'n', 'image4.jpg');
-
 
 -- --------------------------------------------------------
 
@@ -250,10 +249,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`uid`, `name`, `email`, `password`) VALUES
-(1, 'a', 'a@gmail.com', 'a'),
-(2, 'b', 'b@gmail.com', 'b'),
-(555, 'trial', 'asd@asd', 'a'),
-(556, 'trial2', 'a2@gmail.com', 'a');
+(1, 'Alok', 'alok@gmail.com', 'alok'),
+(2, 'Varshini', 'varshini@gmail.com', 'varshini'),
+(3, 'Adam', 'adam@gmail.com', 'adam'),
+(4, 'Eppa', 'eppa@gmail.com', 'eppa');
 
 --
 -- Indexes for dumped tables
