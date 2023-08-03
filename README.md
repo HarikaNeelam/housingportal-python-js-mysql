@@ -1,2 +1,3 @@
-Python Flask Apartment Purchase system
+Birmingham Homes - Housing Portal Website
 
+Technologies used : Python , Flask , HTML , CSS , Javascript
