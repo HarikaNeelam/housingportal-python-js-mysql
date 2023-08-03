@@ -17,16 +17,25 @@
 	<style type="text/css">
 
 	.compressed-image {
-		max-width: 50px; /* Set your desired maximum width */
-		max-height: 50px; /* Set your desired maximum height */
+		max-width: 50px; 
+		max-height: 50px; 
 		width: auto;
 		height: auto;
 		border-radius: 50%;
 	  }
 
 	  .logo-text {
-  margin-left: 5px; /* Adjust the value as needed */
+  margin-left: 5px; 
 }
+.jumbotron {
+		background-color: #99ca3b; 
+	}
+
+	.btn-green {
+		background-color: green;
+		color: white;
+	}
+
 	</style>
 </head>
 
@@ -39,7 +48,7 @@
 
 {%endif%}
 		<!-- Facility part-->
-		<div class="jumbotron jumbotron-fluid bg-dark text-white" style="margin-top: 50px; ">
+		<div class="jumbotron" style="margin-top: 50px; ">
 		  <div class="container">
 			<h1 class="text-light">Facilities</h1>
 		  	<div class="row">
@@ -72,7 +81,8 @@
 			    		<p class="card-text apt-detail">{{items[5]}} BHK, {{items[6]}} Bathrooms, {{items[7]}} sq.ft</p>
 			    		<p class="card-text owner">Owner: {{items[8]}}(# {{items[9]}})</p>
 			    		<p class="card-text price">Rs. {{items[2]}}</p>
-			    		<a href="/login/{{items[0]}}" class="btn {{items[11]}}" style="pointer-events: {{items[3]}};">Book Now</a>
+			    		<a href="/login/{{items[0]}}" class="btn btn-green" style="pointer-events: {{items[3]}};">Book Now</a>
+
 			    		<!-- <button type="button" class="btn btn-primary"  style="padding: 0px" {{items[3]}}><a href="login/{{items[0]}}" class="btn btn-primary" >Book now</a></button> -->
 			  		</div>
 				</div>

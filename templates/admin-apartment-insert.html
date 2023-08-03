@@ -4,12 +4,20 @@
 <style type="text/CSS">
   
   .not-available {
-    color: red;
+    color: #1f6a53;
   }
   
   .available {
-    color: green;
+    color: #1f6a53;
   }
+  th.column1 {
+    background-color: lightgreen;
+  }
+
+  tr.light-green-row {
+    background-color: lightgreen;
+  }
+</style>
   </style>
   <div>
 
@@ -87,12 +95,12 @@
             <label for="image" style="padding-right: 20px;">Upload Apartment Images:</label></br>
             <input type="file" name="image" id="image" style="padding-right: 20px; padding-left: 20px;">
             <div class="container" style="padding-top: 50px" >
-               <button type="submit" id="insert" class="btn btn-secondary"  >Add Apartment</button>
+               <button type="submit" id="insert" class="btn btn-success"  >Add Apartment</button>
             </div>
           </form>
       <div class="container" style="padding-top: 20px" >
 
-         <button type="button" onclick="window.location.href='/'"class="btn btn-secondary"  >Logout</button>
+         <button type="button" onclick="window.location.href='/'"class="btn btn-success"  >Logout</button>
        </div
     </div>
 

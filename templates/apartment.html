@@ -38,7 +38,7 @@
 			top:0;
 			left:0;
 			opacity:0;
-			background-color:rgba(0,0,0,0.5);
+			background-color:#1f6a53;
 			-webkit-transition:all .4s ease-in-out;
 			transition:all .4s ease-in-out
 		}
@@ -56,7 +56,7 @@
 			text-align:center;
 			position:relative;
 			font-size:17px;
-			background:rgba(0,0,0,0.6);
+			background:#1f6a53;
 			-webkit-transform:translatey(-100px);
 			-ms-transform:translatey(-100px);
 			transform:translatey(-100px);
@@ -107,6 +107,11 @@
 			-webkit-transition-delay:.2s;
 			transition-delay:.2s;
 		}
+
+		.btn-green {
+		background-color: #144b39;
+		color: #f2f2f3;
+	}
 	</style>
 
 </head>
@@ -141,8 +146,8 @@
 			    		<p class="card-text apt-detail">{{items[5]}} BHK, {{items[6]}} Bathrooms, {{items[7]}} sq.ft</p>
 			    		<p class="card-text owner">Owner: {{items[8]}}(# {{items[9]}})</p>
 			    		<p class="card-text price">Rs. {{items[2]}}</p>
-			    		<a href="login/{{items[0]}}" class="btn {{items[10]}}" style="pointer-events: {{items[3]}};">Book Now</a>
-			    		<!-- <button type="button" class="btn btn-primary"  style="display: inline-block;" {{items[3]}}><a href="login/{{items[0]}}" style="display: inline-block;">Book now</a></button> -->
+			    		<a href="login/{{items[0]}}" class="btn btn-green" style="pointer-events: {{items[3]}};">Book Now</a>
+
 			  		</div>
 				</div>
 			</div>
