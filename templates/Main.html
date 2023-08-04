@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>University Housing</title>
+  <link rel="stylesheet" type="text/css" href="static/styleee.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .image-slider-container {
+    max-width: 100%;
+    height: 400px; /* Set a fixed height for the slider container */
+    overflow: hidden; /* Hide overflowing images */
+}
+
+.swiper-slide img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover; /* Maintain aspect ratio and cover the entire slide */
+}
+  </style>
+  
+</head>
+<body>
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="#home">Home</a></li>
+      <li class="dropdown">
+        <a href="#accommodation">Accommodation</a>
+        <ul class="dropdown-menu">
+          <li><a href="communities">View Communities</a></li>
+          <li><a href="apartment">View Apartments</a></li>
+        </ul>
+      </li>
+      <li><a href="{{ url_for('home') }}">Admin Sign In</a></li>
+      <li><a href="{{ url_for('login') }}">Sign In</a></li>
+      
+
+    </ul>
+  </nav>
+ <div class="search-container" style="background-image: url('https://www.uab.edu/toolkit/images/branded-items/virtual-backgrounds/UABZoom5.jpg'); width: 100%; height: 500px; display: flex; justify-content: center; align-items: center;">
+
+     <div class="search-bar">
+        <select id="beds-dropdown" required>
+            <option value="" disabled selected>Bedrooms</option>
+            <option value="1">1 Bed</option>
+            <option value="2">2 Beds</option>
+            <option value="3">3 Beds</option>
+            <option value="4">4 Beds</option>
+            <option value="5">5 Beds</option>
+        </select>
+        <select id="bath-dropdown" required>
+            <option value="" disabled selected>Baths</option>
+            <option value="1">1 Bath</option>
+            <option value="2">2 Baths</option>
+            <option value="3">3 Baths</option>
+        </select>
+        <input type="number" id="cost-input" placeholder="Cost in dollars">
+        <button type="button" onclick="performSearch()">Search</button>
+    </div>
+</div>
+   <div id="search-results"></div>
+
+<script>
+    function performSearch() {
+        // Get the selected values from the dropdowns and input field
+        const beds = document.getElementById("beds-dropdown").value;
+        const baths = document.getElementById("bath-dropdown").value;
+        const cost = document.getElementById("cost-input").value;
+
+        // Perform the search by sending the values to the server
+        fetch(`/search?beds=${beds}&baths=${baths}&cost=${cost}`)
+            .then(response => response.json())
+            .then(data => displayResults(data))
+            .catch(error => console.error("Error fetching data:", error));
+    }
+
+    function displayResults(data) {
+        const resultsDiv = document.getElementById("search-results");
+        resultsDiv.innerHTML = ""; // Clear previous results
+
+        if (data.length === 0) {
+            resultsDiv.innerText = "No apartments found matching the criteria.";
+            return;
+        }
+
+        // Display each apartment in the results
+        data.forEach(apartment => {
+            const apartmentDiv = document.createElement("div");
+            apartmentDiv.className = "apartment-card-result";
+
+
+
+
+            const imageUrl = apartment.img
+                ? `/static/apartments/${apartment.img}`
+                : "/static/apartments/placeholder.jpg"; // Use the correct path
+
+            const img = document.createElement('img');
+            img.src = imageUrl; // Use the imageUrl variable instead of a hardcoded path
+            img.alt = "Apartment Image";
+            img.classList.add('apartment-image-result');
+
+            apartmentDiv.innerHTML = `
+                <h3>Apartment ID: ${apartment.apt_id}</h3>
+                <p>Bedrooms: ${apartment.bhk}</p>
+                <p>Bathrooms: ${apartment.bathroom}</p>
+                <p>Size: ${apartment.size} sq.ft</p>
+                <p>Description: ${apartment.description}</p>
+                <p>Price: $${apartment.price}</p>
+            `;
+            apartmentDiv.appendChild(img);
+            apartmentDiv.appendChild(document.createElement('hr'));
+
+            resultsDiv.appendChild(apartmentDiv);
+        });
+    }
+</script>
+
+<hr>
+  <div class="headingfour">
+    <center><h3>Discover rental properties in Birmingham.</h3></center>
+  </div>
+
+  <div class="property-listings">
+    <div class="property-card">
+      <img src="/static/apartments/bhomes1.png" alt="H2 Real estate">
+      <div class="property-info">
+        <h3>UAB Housing made easy</h3>
+        <p style="font-size: 18px;">Welcome to Birmingham homes, your one-stop destination for finding the perfect living space near UAB. Our user-friendly website offers a diverse range of apartments and houses for UAB college students and residents. Whether you're an international student or a local looking for convenience, we have the ideal rental for you. Let us help you find the perfect home near this prestigious international school in the USA.</p>
+      <a href="#">Connect with students in Birmingham Homes</a>
+      </div>
+    </div>
+
+   <div class="slider-container">
+    <h1 class="slider-heading">Explore rental properties within walking distance of UAB</h1>
+    <!-- Image Slider -->
+    <div class="image-slider-container swiper-container">
+        <div class="swiper-wrapper">
+            <!-- Swiper slide elements will be added dynamically using JavaScript -->
+        </div>
+        <!-- Swiper Navigation Arrows -->
+        <div class="swiper-button-prev">&#10094;</div>
+        <div class="swiper-button-next">&#10095;</div>
+        <!-- Swiper Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+
+<!-- Add the Swiper library -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    // Fetch the data from Flask API and update the slider with images and details
+    fetch('/indexi')
+        .then(response => response.json())
+        .then(data => {
+            // Get reference to swiper wrapper
+            const swiperWrapper = document.querySelector('.swiper-wrapper');
+
+            data.forEach(apartment => {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.classList.add('swiper-slide');
+
+                // Create hyperlink
+                const link = document.createElement('a');
+                link.href = '/apartment'; // Fixed URL path to the apartments page
+
+                // Create image
+                const img = document.createElement('img');
+                img.src = '/static/apartments/' + apartment[2]; // Use /static/apartments/ for the image URL
+                img.alt = apartment[0]; // apartment[0] is door no
+
+                // Create text content
+                const h3 = document.createElement('h3');
+                h3.textContent = "Apt ID: " + apartment[0]; // apartment[0] is door no
+
+                const p = document.createElement('p');
+                p.textContent = "Description: " + apartment[1]; // apartment[1] is description
+
+                // Add elements to hyperlink
+                link.appendChild(img);
+                link.appendChild(h3);
+                link.appendChild(p);
+
+                // Add hyperlink to slide
+                slide.appendChild(link);
+
+                // Add slide to wrapper
+                swiperWrapper.appendChild(slide);
+            });
+
+            // Initialize the Swiper after dynamically adding the slides
+            var swiper = new Swiper('.image-slider-container', {
+                slidesPerView: 3,
+                spaceBetween: 20,
+                loop: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2
+                    },
+                    576: {
+                        slidesPerView: 1
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+</script>
+
+<script>
+  function search() {
+    const bedsDropdown = document.getElementById('beds-dropdown');
+    const bathDropdown = document.getElementById('bath-dropdown');
+    const costInput = document.getElementById('cost-input');
+    const searchButton = document.querySelector('.search-bar button');
+
+    // Check if the beds and baths dropdowns are selected
+    if (bedsDropdown.value === '' || bathDropdown.value === '') {
+      alert('Please select both the number of beds and baths.');
+      return;
+    }
+
+    // Perform the search or any other action here
+    // For demonstration purposes, let's just log the values
+    console.log('Beds:', bedsDropdown.value);
+    console.log('Baths:', bathDropdown.value);
+    console.log('Cost:', costInput.value);
+  }
+  function incrementCostValue(incrementBy) {
+  const costInput = document.getElementById('cost-input');
+  const currentValue = parseFloat(costInput.value) || 0;
+  const newValue = currentValue + incrementBy;
+  costInput.value = Math.max(0, newValue); // Ensure the value doesn't go below zero
+}
+
+</script>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="contact-info">
+      <h3>Contact Us</h3>
+      <p>Phone: (123) 456-7890</p>
+      <p>Email: info@birminghamhousing.com</p>
+      <p>Address: 123 Student Ave, City, State, ZIP</p>
+    </div>
+    <div class="social-links">
+      <h3>Follow Us</h3>
+      <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+        <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+    <div class="useful-links">
+      <h3>Useful Links</h3>
+      <a href="communities"><i class="fas fa-home"></i> Accommodation</a>
+        <a href="apartment"><i class="fas fa-book"></i> Book Apartment</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footerp">&copy; 2023 Birmingham Housing. All rights reserved.</p>
+    <p class="footerp"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a></p>
+  </div>
+</footer>
+</body>
+</html>

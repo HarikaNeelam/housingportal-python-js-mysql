@@ -1,0 +1,426 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+  color: #003d00;
+  /*display: flex;
+  align-items: center;
+  justify-content: center;*/
+}
+
+/* Navigation Menu */
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: #003d00;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-menu li {
+  display: inline-block;
+}
+
+.nav-menu li a {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.nav-menu li a:hover {
+  background-color: #006400;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #003d00;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-menu li {
+  display: block;
+}
+
+.dropdown-menu li a {
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #006400;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Search Bar */
+/* Apply styles to the search container */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a9d9b3
+}
+
+/* Apply styles to the search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0; /* Light gray background */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+/* Apply styles to the dropdowns */
+.search-bar select {
+  margin: 5px;
+  padding: 8px;
+  border: none;
+  background-color: #d2eace; /* Light green background for dropdowns */
+  color: #333; /* Text color */
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the input field for cost */
+.search-bar input[type="number"] {
+  margin: 5px;
+  padding: 8px;
+  border: none;
+   /* Light green background for input */
+  color: #333; /* Text color */
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the search button */
+.search-bar button {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  background-color: #1c7041; /* Dark green background for button */
+  color: #fff; /* Text color */
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* On hover, darken the button */
+.search-bar button:hover {
+  background-color: #166932; /* Darker green on hover */
+}
+
+
+/* Property Listings */
+.property-listings {
+  padding: 20px;
+}
+
+.property-info p{
+  font-size: 20px;
+}
+
+.property-card {
+  background-color: #f9f9f9;
+  border: 1px solid #006400;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 61, 0, 0.2);
+}
+
+.property-card img {
+  max-width: 100px;
+  margin-right: 20px;
+}
+
+.property-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #003d00;
+}
+
+.property-card p {
+  margin: 10px 0;
+  font-size: 20px;
+  color: #666;
+}
+
+/* Image slider */
+.slider-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #d3f6e3;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.slider-heading {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #003d00;
+}
+/* Swiper container */
+.image-slider-container {
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+/* Swiper slide */
+.slider-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #d3f6e3;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.slider-heading {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #003d00;
+}
+/* Swiper container */
+.image-slider-container {
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+/* Swiper slide */
+.image-slide {
+  text-align: center;
+  background-color: #f1fff1;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 20px;
+  transform: scale(0.9);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+.image-slide img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+.image-slide h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #003d00;
+}
+.image-slide p {
+  font-size: 16px;
+  color: #666;
+}
+/* Add gap between slides */
+.swiper-slide:not(:last-child) {
+  margin-right: 20px;
+}
+/* Scale up on hover */
+.image-slide:hover {
+  transform: scale(1);
+}
+/* Swiper Navigation Arrows */
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  z-index: 10;
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  opacity: 1;
+}
+.swiper-button-prev {
+  left: 0;
+}
+.swiper-button-next {
+  right: 0;
+}
+/* Swiper Pagination */
+.swiper-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #a9d9b3;
+  opacity: 0.6;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.swiper-pagination-bullet-active {
+  background-color: #3fae3b;
+  opacity: 1;
+}
+
+
+/* Campus Image */
+.campusimage {
+  position: relative;
+}
+
+.landing-text {
+  background-color: #006400;
+  padding: 20px;
+  position: absolute;
+  border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #e1e1e1;
+  opacity: 0;
+  animation: fadeInAndStay 5s linear forwards;
+}
+
+/* Cool animations for the text */
+@keyframes fadeInAndStay {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.campusimage img {
+  width: 100%;
+  max-height: 100vh;
+  animation: slideInFromTop 2s ease-in-out;
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #003d00;
+  color: #fff;
+}
+
+/* Retro Styling - All Shades of Green */
+body {
+  color: #003d00;
+}
+
+.nav-menu li a:hover {
+  background-color: #006400;
+}
+
+.search-bar button {
+  background-color: #006400;
+}
+
+.property-card {
+  border-color: #006400;
+  box-shadow: 0 4px 8px rgba(0, 61, 0, 0.2);
+}
+.site-footer {
+  background-color: #005700;
+  color: #fff;
+  padding: 20px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.contact-info,
+.social-links,
+.useful-links {
+  flex: 1;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00a000;
+}
+
+p {
+  margin: 5px 0;
+}
+
+.social-links a,
+.useful-links a {
+  display: block;
+  color: #b0ffb0;
+  text-decoration: none;
+  margin-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover,
+.useful-links a:hover {
+  color: #00ff00;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-bottom p {
+  margin: 5px 0;
+}
