@@ -403,11 +403,20 @@ def user_login(build):
                     mysql.connection.commit()
                     print (traceback.print_exc())
                     flash('Your Apartment has been booked successfully.', 'success')  # Set the flash message
-                    return render_template('user-dashboard.html',name=session['name'],username=session['email'],uid=session['uid'])
+
+                    cur = mysql.connection.cursor()
+                    cur.execute('''SELECT a.doorno, s.name, ab.booking_id, a.price, ab.book_date FROM apt_book ab
+                    JOIN user u ON u.uid = ab.uid
+                    JOIN society s ON s.sid = ab.sid
+                    JOIN apartment a ON a.apt_id = ab.apt_id
+                    WHERE u.uid = %s
+                    ORDER BY ab.booking_id DESC''', (uid,))
+                    data = cur.fetchall()
+                    return render_template('user-dashboard.html',name=session['name'],username=session['email'],uid=session['uid'],data=data)
                 except:
                      print (traceback.print_exc())
                      flash('An error occurred while booking the apartment. Please try again.', 'error')
-                return redirect('user-dashboard',name=session['name'],username=session['email'],uid=session['uid']) 
+                return redirect('user-dashboard',name=session['name'],username=session['email'],uid=session['uid'],data=data) 
             else:
                  flash('Invalid username/password.Try again or Sign up.')
     return render_template('login.html')

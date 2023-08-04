@@ -23,16 +23,12 @@
 <body>
   <nav>
     <ul class="nav-menu">
-      <li><a href="#home">Home</a></li>
+      <li><a href="/">Home</a></li>
       <li class="dropdown">
-        <a href="#accommodation">Accommodation</a>
-        <ul class="dropdown-menu">
-          <li><a href="communities">View Communities</a></li>
-          <li><a href="apartment">View Apartments</a></li>
-        </ul>
-      </li>
+      <li><a href="communities"> Communities</a></li>
+      <li><a href="apartment"> Apartments</a></li>
       <li><a href="{{ url_for('home') }}">Admin Sign In</a></li>
-      <li><a href="{{ url_for('login') }}">Sign In</a></li>
+
       
 
     </ul>
@@ -101,12 +97,13 @@
             img.classList.add('apartment-image-result');
 
             apartmentDiv.innerHTML = `
-                <h3>Apartment ID: ${apartment.apt_id}</h3>
+                <h3>Apartment Number: ${apartment.apt_id}</h3>
                 <p>Bedrooms: ${apartment.bhk}</p>
-                <p>Bathrooms: ${apartment.bathroom}</p>
+                <p>Room No: ${apartment.doorno}</p>
                 <p>Size: ${apartment.size} sq.ft</p>
                 <p>Description: ${apartment.description}</p>
-                <p>Price: $${apartment.price}</p>
+                <p>Status: Available</p>
+                <p>Price: ${apartment.price}</p>
             `;
             apartmentDiv.appendChild(img);
             apartmentDiv.appendChild(document.createElement('hr'));
@@ -172,7 +169,7 @@
 
                 // Create text content
                 const h3 = document.createElement('h3');
-                h3.textContent = "Apt ID: " + apartment[0]; // apartment[0] is door no
+                h3.textContent = "Apartment Number: " + apartment[0]; // apartment[0] is door no
 
                 const p = document.createElement('p');
                 p.textContent = "Description: " + apartment[1]; // apartment[1] is description

@@ -113,10 +113,23 @@
     color: white;
   }
 	</style>
-
+  <link rel="stylesheet" type="text/css" href="static/styleee.css">
 </head>
 
 <body>
+	<nav>
+		<ul class="nav-menu">
+		  <li><a href="/">Home</a></li>
+			  <li><a href="communities"> Communities</a></li>
+		  </li>
+		  
+	
+		</ul>
+	  </nav>
+
+
+
+
 	<div class="container-fluid">
 
 	    <header class="text-center" >
@@ -145,7 +158,7 @@
 			    		<h4 class="card-title">{{items[1]}}</h4>
 			    		<p class="card-text apt-detail">{{items[5]}} BHK, {{items[6]}} Bathrooms, {{items[7]}} sq.ft</p>
 			    		<p class="card-text owner">Owner: {{items[8]}}(# {{items[9]}})</p>
-			    		<p class="card-text price">Rs. {{items[2]}}</p>
+			    		<p class="card-text price">${{items[2]}}</p>
 			    		<a href="login/{{items[0]}}" class="btn {{items[10]}} dark-green-button" style="pointer-events: {{items[3]}};">Book Now</a>
 			  		</div>
 				</div>

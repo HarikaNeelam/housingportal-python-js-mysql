@@ -57,6 +57,38 @@
         .error {
             color: #f3c317; /* Text color for error messages #f3c317 */
         }
+        .bookinghistory {
+        margin-top: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 10px;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #144b39;
+        color: #f2f2f3;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #d1d1d1;
+    }
+
     </style>
 </head>
 <body>
@@ -73,8 +105,32 @@
         <div id="header">
             <h1>User Dashboard</h1>
             <h2>Welcome {{name}}</h2>
-            <h2>{{uid}}</h2>
         </div>
+        <h1>Your Bookings</h1>
+
+        <div class="bookinghistory">
+            <table>
+                <tr>
+                    <th>Door No</th>
+                    <th>Society Name</th>
+                    <th>Booking ID</th>
+                    <th>Price ($)</th>
+                    <th>Book Date</th>
+                </tr>
+                {% for entry in data %}
+                <tr>
+                    <td>{{ entry[0] }}</td>
+                    <td>{{ entry[1] }}</td>
+                    <td>{{ entry[2] }}</td>
+                    <td>{{ entry[3] }}</td>
+                    <td>{{ entry[4] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        
+
+
         <div>
             <!-- Your content here -->
             <div class="flash-messages">
