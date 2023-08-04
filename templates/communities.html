@@ -23,6 +23,7 @@
             background-color: var(--light-green);
         }
 
+<<<<<<< HEAD
         .bg-image-full {
             background: no-repeat center center scroll;
             -webkit-background-size: cover;
@@ -68,6 +69,15 @@
             border-color: var(--medium-green);
         }
     </style>
+=======
+		}
+		.btn-green {
+		background-color: #144b39;
+		color: white;
+	}
+
+	</style>
+>>>>>>> 13bc46ab796b01c2455ccd1f54003e3c63be7698
 
 </head>
 
@@ -82,6 +92,7 @@
             </div>
         </header>
 
+<<<<<<< HEAD
         <section class="py-5">
             <div class="container">
                 <h1>Communities</h1>
@@ -89,6 +100,35 @@
                 <p>We cover the following list of communities in this city, around you.</p>
             </div>
         </section>
+=======
+		<section class="py-5">
+			<div class="container">
+				<h1>Communities</h1>
+				<p class="lead">around Birmingham.</p>
+				<p>We cover the following list of communities in this city, around you.</p>
+			</div>
+		</section>
+
+		<div class="row mb-4" style="margin-top: 100px; margin-bottom: 50px;">
+
+			{% for items in data %}
+			<div class="col-md-12 mt-3">
+				<div class="card flex-md-row">
+					<img class="card-img" src="{{url_for('static', filename='communities/' + items[4])}}"
+						style="width: 300px; height: 250px;" alt="Society image">
+					<div class="card-body">
+						<h3 class="card-title building-name">{{items[1]}}</h3>
+						<p class="card-text mb-1 text-muted address">{{items[2]}}</p>
+						<p class="card-text"><span class="manager"></span> <span class="muted mgr-number"></span></p>
+						<a href="specificapt/{{items[0]}}" class="btn btn-green">View Apartments</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+
+		</div>
+	</div>
+>>>>>>> 13bc46ab796b01c2455ccd1f54003e3c63be7698
 
         <div class="row mb-4" style="margin-top: 100px; margin-bottom: 50px;">
             {% for items in data %}

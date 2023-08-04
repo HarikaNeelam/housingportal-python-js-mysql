@@ -37,20 +37,52 @@
             padding: 20px;
         }
 
+<<<<<<< HEAD
         h1,
         h4,
         p {
             color: var(--dark-green);
         }
+=======
+		.hovereffect .overlay {
+			width:100%;
+			height:100%;
+			position:absolute;
+			overflow:hidden;
+			top:0;
+			left:0;
+			opacity:0;
+			background-color:#1f6a53;
+			-webkit-transition:all .4s ease-in-out;
+			transition:all .4s ease-in-out
+		}
+>>>>>>> 13bc46ab796b01c2455ccd1f54003e3c63be7698
 
         .lead {
             color: var(--medium-green);
         }
 
+<<<<<<< HEAD
         .card {
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+=======
+		.hovereffect h2 {
+			text-transform:uppercase;
+			color:#fff;
+			text-align:center;
+			position:relative;
+			font-size:17px;
+			background:#1f6a53;
+			-webkit-transform:translatey(-100px);
+			-ms-transform:translatey(-100px);
+			transform:translatey(-100px);
+			-webkit-transition:all .2s ease-in-out;
+			transition:all .2s ease-in-out;
+			padding:10px;
+		}
+>>>>>>> 13bc46ab796b01c2455ccd1f54003e3c63be7698
 
         .card-img {
             object-fit: cover;
@@ -88,10 +120,23 @@
             margin-top: 15px;
         }
 
+<<<<<<< HEAD
         .card-body a.btn:hover {
             background-color: var(--dark-green);
         }
     </style>
+=======
+		.hovereffect:hover a.info {
+			-webkit-transition-delay:.2s;
+			transition-delay:.2s;
+		}
+
+	.dark-green-button {
+    background-color: darkgreen;
+    color: white;
+  }
+	</style>
+>>>>>>> 13bc46ab796b01c2455ccd1f54003e3c63be7698
 
 </head>
 
@@ -130,7 +175,30 @@
             {% endfor %}
         </div>
 
+<<<<<<< HEAD
     </div>
+=======
+		<!-- https://res.cloudinary.com/g5-assets-cld/image/upload/x_0,y_252,h_1799,w_2999,c_crop/q_auto,f_auto,fl_lossy,g_center,h_1200,w_2000/g5/g5-c-j2uwbrzj-morgan-management-llc/g5-cl-1h5bbly3yt-50-front/uploads/000-R-INT-002-HR_sbldrf.jpg -->
+	
+		<div class="row" style="margin-top: 80px; margin-bottom: 50px;">
+			{%for items in data%}
+			<div class="col-sm-3 mt-3">
+				<div class="card h-150 shadow hovereffect">
+					<img class="card-img" src="{{url_for('static', filename='apartments/' + items[4])}}" style="width: 300px; height: 250px;" alt="Apartment image">
+					<div class="card-body"> 
+			    		<h4 class="card-title">{{items[1]}}</h4>
+			    		<p class="card-text apt-detail">{{items[5]}} BHK, {{items[6]}} Bathrooms, {{items[7]}} sq.ft</p>
+			    		<p class="card-text owner">Owner: {{items[8]}}(# {{items[9]}})</p>
+			    		<p class="card-text price">Rs. {{items[2]}}</p>
+			    		<a href="login/{{items[0]}}" class="btn {{items[10]}} dark-green-button" style="pointer-events: {{items[3]}};">Book Now</a>
+			  		</div>
+				</div>
+			</div>
+			{%endfor%}
+		</div>
+
+	</div>
+>>>>>>> 13bc46ab796b01c2455ccd1f54003e3c63be7698
 </body>
 
 </html>
