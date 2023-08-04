@@ -108,10 +108,10 @@
 			transition-delay:.2s;
 		}
 
-		.btn-green {
-		background-color: #144b39;
-		color: #f2f2f3;
-	}
+	.dark-green-button {
+    background-color: darkgreen;
+    color: white;
+  }
 	</style>
 
 </head>
@@ -146,8 +146,7 @@
 			    		<p class="card-text apt-detail">{{items[5]}} BHK, {{items[6]}} Bathrooms, {{items[7]}} sq.ft</p>
 			    		<p class="card-text owner">Owner: {{items[8]}}(# {{items[9]}})</p>
 			    		<p class="card-text price">Rs. {{items[2]}}</p>
-			    		<a href="login/{{items[0]}}" class="btn btn-green" style="pointer-events: {{items[3]}};">Book Now</a>
-
+			    		<a href="login/{{items[0]}}" class="btn {{items[10]}} dark-green-button" style="pointer-events: {{items[3]}};">Book Now</a>
 			  		</div>
 				</div>
 			</div>
