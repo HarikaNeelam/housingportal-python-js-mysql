@@ -9,12 +9,12 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f2f2f3; /* Background color #f2f2f3 */
         }
         #sidebar {
             width: 250px;
-            background-color: #333;
-            color: #fff;
+            background-color: #1f6a53; /* Background color #1f6a53 */
+            color: #f2f2f3; /* Text color #f2f2f3 */
             padding-top: 20px;
             position: fixed;
             height: 100%;
@@ -26,16 +26,36 @@
         #sidebar li {
             padding: 10px;
             text-align: center;
+            color: wheat;
+        }
+
+        #sidebar a {
+            color: wheat;
+            text-decoration: none;
         }
         #content {
             margin-left: 250px;
             padding: 20px;
         }
         #header {
-            background-color: #222;
-            color: #fff;
+            background-color: #144b39; /* Background color #144b39 */
+            color: #f2f2f3; /* Text color #f2f2f3 */
             text-align: center;
             padding: 10px;
+        }
+        /* Styling for flash messages */
+        .flash-messages {
+            margin-top: 20px;
+        }
+        .messages {
+            list-style: none;
+            padding: 0;
+        }
+        .success {
+            color: #99ca3b; /* Text color for success messages #99ca3b */
+        }
+        .error {
+            color: #f3c317; /* Text color for error messages #f3c317 */
         }
     </style>
 </head>
@@ -52,6 +72,8 @@
     <div id="content">
         <div id="header">
             <h1>User Dashboard</h1>
+            <h2>Welcome {{name}}</h2>
+            <h2>{{uid}}</h2>
         </div>
         <div>
             <!-- Your content here -->

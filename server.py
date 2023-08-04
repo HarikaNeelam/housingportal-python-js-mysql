@@ -3,7 +3,7 @@ from flask_mysqldb import MySQL
 from random import randint
 import traceback,os
 from collections import defaultdict
-
+from flask import session
 
 app = Flask(__name__)
 app.secret_key = 'my unobvious secret key'
@@ -371,6 +371,28 @@ def user_login(build):
             cur = mysql.connection.cursor()
             cur.execute('''SELECT * FROM user WHERE (email, password) = (%s,%s)''',(user_email,user_password))
             n = cur.fetchall()
+
+
+            cur = mysql.connection.cursor()
+            cur.execute('''SELECT name FROM user WHERE (email, password) = (%s,%s)''',(user_email,user_password))
+            name = cur.fetchall()
+            print("--------name is ----------")
+            print(name[0][0])
+            print("------------------")
+            name=name[0][0]
+
+            cur = mysql.connection.cursor()
+            cur.execute('''SELECT uid FROM user WHERE (email, password) = (%s,%s)''',(user_email,user_password))
+            uid = cur.fetchall()
+            print("--------uid is ----------")
+            print(uid[0][0])
+            print("------------------")
+            uid=uid[0][0]
+            session['name'] = name
+            session['email'] = user_email
+            session['password'] = user_password
+            session['uid'] = uid
+
             if len(n)!=0:
                 user_id = str(n[0][0])
                 try:
@@ -381,11 +403,11 @@ def user_login(build):
                     mysql.connection.commit()
                     print (traceback.print_exc())
                     flash('Your Apartment has been booked successfully.', 'success')  # Set the flash message
-                    return render_template('user-dashboard.html')
+                    return render_template('user-dashboard.html',name=session['name'],username=session['email'],uid=session['uid'])
                 except:
                      print (traceback.print_exc())
                      flash('An error occurred while booking the apartment. Please try again.', 'error')
-                return redirect('user-dashboard') 
+                return redirect('user-dashboard',name=session['name'],username=session['email'],uid=session['uid']) 
             else:
                  flash('Invalid username/password.Try again or Sign up.')
     return render_template('login.html')
@@ -502,6 +524,20 @@ def updapt():
     owner_data = cur.fetchall()
 
     return render_template('admin-apartment-update.html', data=data, society_data=society_data, owner_data=owner_data)
+
+@app.route('/booking_history/<int:uid>')
+def booking_history(uid):
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT a.doorno, s.name, ab.booking_id, u.name, ab.book_date FROM apt_book ab
+                JOIN user u ON u.uid = ab.uid
+                JOIN society s ON s.sid = ab.sid
+                JOIN apartment a ON a.apt_id = ab.apt_id
+                WHERE u.uid = %s''', (uid,))
+    data = cur.fetchall()
+    return render_template('booking_history.html', data=data)
+
+
+
 
     
 if __name__ == '__main__':
