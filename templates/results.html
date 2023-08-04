@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    search results
+</head>
+<body>
+    <h1>Search Results</h1>
+    <table>
+        <tr>
+            <th>Apartment ID</th>
+            <th>Society ID</th>
+            <th>Apartment Detail Code</th>
+            <th>Door Number</th>
+            <th>Owner Person ID</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Image</th>
+        </tr>
+        {% for result in results %}
+        <tr>
+            <td>{{ result[0] }}</td>
+            <td>{{ result[1] }}</td>
+            <td>{{ result[2] }}</td>
+            <td>{{ result[3] }}</td>
+            <td>{{ result[4] }}</td>
+            <td>{{ result[5] }}</td>
+            <td>{{ result[6] }}</td>
+            <td><img src="{{ result[7] }}" alt="Apartment Image" width="100" height="100"></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

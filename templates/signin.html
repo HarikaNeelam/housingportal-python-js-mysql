@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign In</title>
+    <link rel="stylesheet" type="text/css" href="C:\Users\epapr\OneDrive\Desktop\AWAD final project\styless\signincss.css">
+    <style>
+        /* Apply styles to the body to set a background color and font family */
+body {
+    background-color: #f0f7ec;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Apply styles to the navigation bar */
+  .nav-menu {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    background-color: #003d00;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+  .nav-menu li {
+    display: inline-block;
+  }
+  
+  .nav-menu li a {
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  
+  .nav-menu li a:hover {
+    background-color: #006400;
+  }
+  
+  /* Dropdown Menu */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #003d00;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-menu li {
+    display: block;
+  }
+  
+  .dropdown-menu li a {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-menu li a:hover {
+    background-color: #006400;
+  }
+  
+  /* Show dropdown on hover */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  
+  /* Apply styles to the sign-in container */
+  .signin-container {
+    max-width: 400px;
+    margin: 60px auto; /* Add some margin between the navigation bar and the sign-in container */
+    background-color: #d2eace; /* Light green background for the sign-in container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  }
+  
+  .sign-in-heading {
+    color: #1c7041; /* Dark green color for the heading */
+    text-align: center;
+  }
+  
+  .sign-in-fields {
+    margin-top: 20px;
+  }
+  
+  .sign-in-fields label {
+    display: block;
+    color: #333; /* Text color for labels */
+    margin-bottom: 5px;
+  }
+  
+  .sign-in-fields input[type="email"],
+  .sign-in-fields input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #1c7041; /* Dark green border for the input fields */
+    border-radius: 4px;
+  }
+  
+  .sign-in-fields input[type="submit"] {
+    background-color: #1c7041; /* Dark green background for the sign-in button */
+    color: #fff; /* Text color for the sign-in button */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .sign-in-fields input[type="submit"]:hover {
+    background-color: #166932; /* Darker green on hover for the sign-in button */
+  }
+  
+  .existing-account {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .existing-account a {
+    color: #1c7041; /* Dark green color for the "Sign up here" link */
+    text-decoration: none;
+  }
+  
+  .existing-account a:hover {
+    text-decoration: underline;
+  }
+  
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li class="dropdown">
+            <a href="#accommodation">Accommodation</a>
+            <ul class="dropdown-menu">
+              <li><a href="#propertya">Property A</a></li>
+              <li><a href="#propertyb">Property B</a></li>
+            </ul>
+          </li>
+          <li><a href="Templates/signin.html">Sign In</a></li>
+          <li><a href="Templates/signup.html">Sign Up</a></li>
+        </ul>
+      </nav>
+<div class="signin-container">
+    <h1 class="sign-in-heading">Sign In</h1>
+    <div class="sign-in-fields">
+        <label>Email:</label>
+        <input type="email" name="email" required>
+        <label>Password:</label>
+        <input type="password" name="password" required>
+        <input type="submit" value="Sign In" onclick="addRetroButtonClickAnimation()">
+    </div>
+    <div class="existing-account">
+        Don't have an account? <a href="{{ url_for('signup') }}">Sign up here</a>.
+    </div>
+</div>
+
+    <script>
+        function addRetroButtonClickAnimation() {
+            const button = document.querySelector('input[type="submit"]');
+            button.classList.add('retro-button-clicked');
+            setTimeout(() => {
+                button.classList.remove('retro-button-clicked');
+            }, 200);
+        }
+    </script>
+</body>
+</html>

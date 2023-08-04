@@ -2,63 +2,111 @@
 <html>
 
 <head>
-	<title>Society list</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <title>Society list</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-	<style type="text/css">
-		.bg-image-full {
-			background: no-repeat center center scroll;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			background-size: cover;
-			-o-background-size: cover;
+    <style type="text/css">
+        /* Shades of Green */
+        :root {
+            --dark-green: #006400;
+            --medium-green: #228B22;
+            --light-green: #f0f7f2;
+        }
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: var(--light-green);
+        }
 
-		}
-	</style>
+        .bg-image-full {
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+
+        header {
+            background-color: var(--medium-green);
+            color: #fff;
+            padding: 20px;
+        }
+
+        h1, h3 {
+            color: var(--dark-green);
+        }
+
+        .lead {
+            color: var(--medium-green);
+        }
+
+        .card {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            background-color: var(--light-green);
+        }
+
+        .card-img {
+            object-fit: cover;
+            border-radius: 10px 0 0 10px;
+        }
+
+        .btn-primary {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--medium-green);
+            border-color: var(--medium-green);
+        }
+    </style>
 
 </head>
 
 <body>
-	<div class="container-fluid">
+	
+    <div class="container-fluid">
 
-		<header class="text-center">
-			<div class="py-5 bg-image-full"
-				style="background-image: url('https://media.equityapartments.com/images/c_crop,x_0,y_0,w_1920,h_1080/c_fill,w_1920,h_1080/q_80/4206-28/the-kelvin-apartments-exterior.jpg'); ">
-				<div style="height: 200px;"></div>
-			</div>
-		</header>
+        <header class="text-center">
+            <div class="py-5 bg-image-full"
+                style="background-image: url('https://media.equityapartments.com/images/c_crop,x_0,y_0,w_1920,h_1080/c_fill,w_1920,h_1080/q_80/4206-28/the-kelvin-apartments-exterior.jpg'); ">
+                <div style="height: 200px;"></div>
+            </div>
+        </header>
 
-		<section class="py-5">
-			<div class="container">
-				<h1>Communities</h1>
-				<p class="lead">around Birmingham.</p>
-				<p>We cover the following list of communities in this city, around you.</p>
-			</div>
-		</section>
+        <section class="py-5">
+            <div class="container">
+                <h1>Communities</h1>
+                <p class="lead">around Birmingham.</p>
+                <p>We cover the following list of communities in this city, around you.</p>
+            </div>
+        </section>
 
-		<div class="row mb-4" style="margin-top: 100px; margin-bottom: 50px;">
-
-			{% for items in data %}
-			<div class="col-md-12 mt-3">
-				<div class="card flex-md-row">
-					<img class="card-img" src="{{url_for('static', filename='communities/' + items[4])}}"
-						style="width: 300px; height: 250px;" alt="Society image">
-					<div class="card-body">
-						<h3 class="card-title building-name">{{items[1]}}</h3>
-						<p class="card-text mb-1 text-muted address">{{items[2]}}</p>
-						<p class="card-text"><span class="manager"></span> <span class="muted mgr-number"></span></p>
-						<a href="specificapt/{{items[0]}}" class="btn btn-primary">View Apartments</a>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-
-		</div>
-	</div>
-
+        <div class="row mb-4" style="margin-top: 100px; margin-bottom: 50px;">
+            {% for items in data %}
+            <div class="col-md-12 mt-3">
+                <div class="card flex-md-row">
+                    <img class="card-img" src="{{url_for('static', filename='communities/' + items[4])}}"
+                        style="width: 300px; height: 250px;" alt="Society image">
+                    <div class="card-body">
+                        <h3 class="card-title building-name">{{items[1]}}</h3>
+                        <p class="card-text mb-1 text-muted address">{{items[2]}}</p>
+                        <p class="card-text"><span class="manager"></span> <span class="muted mgr-number"></span></p>
+                        <a href="specificapt/{{items[0]}}" class="btn btn-primary">View Apartments</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
+
+</html>

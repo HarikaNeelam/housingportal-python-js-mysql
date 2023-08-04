@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, flash, redirect
+from flask import Flask, render_template, request, url_for, flash, redirect, jsonify
 from flask_mysqldb import MySQL
 from random import randint
 import traceback,os
@@ -16,25 +16,89 @@ app.config['MYSQL_DB'] = 'housing'
 app.config['MYSQL_HOST'] = 'localhost'
 mysql = MySQL(app)
 
-@app.route('/',methods = ['GET','POST'])
+@app.route('/')
+def main():
+    return render_template('main.html')
+
+@app.route('/index', methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
+
+@app.route('//indexi')
+def get_apartments():
+
+  cur = mysql.connection.cursor()
+  cur.execute("SELECT apartment.doorno, apt_detail.description, apartment.img FROM apt_detail INNER JOIN apartment ON apt_detail.apt_detail_code = apartment.apt_detail_code")
+  
+  apartments = cur.fetchall()
+  
+  return jsonify(apartments)
+
+@app.route('/search')
+def search():
+    # Get the search parameters from the query string
+    beds = int(request.args.get('beds'))
+    baths = int(request.args.get('baths'))
+    cost = (request.args.get('cost'))
+    cur = mysql.connection.cursor()
+  
+    # Perform the search query
+    cur.execute(
+        "SELECT * FROM apartment JOIN apt_detail ON apartment.apt_detail_code = apt_detail.apt_detail_code "
+        "WHERE bhk<=%s AND bathroom<=%s AND price<=%s",
+        (beds, baths, cost)
+    )
+
+    # Fetch all matching apartments
+    results = cur.fetchall()
+    cur.close()
+    # Convert the results to a list of dictionaries for easier processing
+    apartment_list = []
+    for row in results:
+
+        apartment = {
+            "apt_id": row[0],
+            "bhk": row[1],
+            "bathroom": row[2],
+            "size": row[3],
+            "description": row[4],
+            "price": row[5],
+            "img": row[6]        
+            }
+        apartment_list.append(apartment)
+
+    return jsonify(apartment_list)
+
+
+@app.route('/home', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         username = request.form['admin_username']
         password = request.form['password']
         cur = mysql.connection.cursor()
-        cur.execute('''SELECT * FROM admin WHERE (admin_username, password) = (%s,%s)''',(username,password))
+        cur.execute('''SELECT * FROM admin WHERE (admin_username, password) = (%s,%s)''', (username, password))
         n = cur.fetchall()
-        if len(n)!=0:
-            print (n)
+        if len(n) != 0:
+            print(n)
             return render_template('admin-logged.html')
         else:
-            print (n)
+            print(n)
             return render_template('index.html')
     return render_template('index.html')
 
-@app.route('/home',methods = ['GET','POST'])
-def homepage():
-    return render_template('home.html')
+# Add this new route to handle the redirection
+
+# @app.route('/signin', methods=['GET', 'POST'])
+# def signin():
+    
+#     return render_template('signin.html')
+
+#@app.route('/signup', methods=['GET', 'POST'])
+#def signup():
+    #Your signup logic here
+ # return render_template('signup.html')
+
+
 @app.route('/apartment', methods=['GET', 'POST'])
 def apartment():
     data = []
@@ -389,31 +453,31 @@ def transcript():
 
 @app.route('/login',methods = ['GET','POST'])
 def login():
-    return render_template('login.html')  
-'''
-@app.route('/authenticate',methods = ['GET','POST'])
-def authenticate():
-    if request.method == 'POST':
-        apt_id = request.form['apt']
-        uid = request.form['uid']
-        name = request.form['name']
-        try:
-            cur = mysql.connection.cursor()
-            # need to create a new per_id(cuz it might clash with already existing ids)
-            # check if the user already exist in person table
-            # if doesnt insert new values else dont insert
-            # using auto increment for per_id
-            cur.execute("INSERT INTO person(per_id,name) VALUES (%s,%s)",(uid,name,))
-            mysql.connection.commit()
-            cur.execute("UPDATE apartment SET owner_per_id = %s, status = 'n' WHERE apt_id = %s",(uid,apt_id))
-            mysql.connection.commit()
-        except:
-            print traceback.print_exc()
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT apt_id,a.uid,u.uid,u.name FROM apt_book a,user u GROUP BY apt_id,a.uid,u.name HAVING MAX(book_date) and u.uid = a.uid")
-    data = cur.fetchall()
-    return render_template('approve.html',data = data)
-'''
+  return render_template('login.html')  
+
+# @app.route('/authenticate',methods = ['GET','POST'])
+# def authenticate():
+#     if request.method == 'POST':
+#         apt_id = request.form['apt']
+#         uid = request.form['uid']
+#         name = request.form['name']
+#         try:
+#             cur = mysql.connection.cursor()
+#             # need to create a new per_id(cuz it might clash with already existing ids)
+#             # check if the user already exist in person table
+#             # if doesnt insert new values else dont insert
+#             # using auto increment for per_id
+#             cur.execute("INSERT INTO person(per_id,name) VALUES (%s,%s)",(uid,name,))
+#             mysql.connection.commit()
+#             cur.execute("UPDATE apartment SET owner_per_id = %s, status = 'n' WHERE apt_id = %s",(uid,apt_id))
+#             mysql.connection.commit()
+#         except:
+#             print traceback.print_exc()
+#     cur = mysql.connection.cursor()
+#     cur.execute("SELECT apt_id,a.uid,u.uid,u.name FROM apt_book a,user u GROUP BY apt_id,a.uid,u.name HAVING MAX(book_date) and u.uid = a.uid")
+#     data = cur.fetchall()
+#     return render_template('approve.html',data = data)
+
 
 @app.route('/updapt', methods=['GET', 'POST'])
 def updapt():
