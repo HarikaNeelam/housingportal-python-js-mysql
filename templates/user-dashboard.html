@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        #sidebar {
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+        }
+        #sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #sidebar li {
+            padding: 10px;
+            text-align: center;
+        }
+        #content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        #header {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Messages</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+    <div id="content">
+        <div id="header">
+            <h1>User Dashboard</h1>
+        </div>
+        <div>
+            <!-- Your content here -->
+            <div class="flash-messages">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                {% if message[0] == 'success' %}
+                                    <li class="success">{{ message[1] }}</li>
+                                {% elif message[0] == 'error' %}
+                                    <li class="error">{{ message[1] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

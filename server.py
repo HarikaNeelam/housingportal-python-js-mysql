@@ -326,10 +326,12 @@ def user_login(build):
                         VALUES (%s,%s,%s,NOW())''',(apt_id,sid,user_id,))
                     mysql.connection.commit()
                     print (traceback.print_exc())
-                    flash('Your Apartment has been booked successfully.')
-                    return redirect(url_for('home'))
+                    flash('Your Apartment has been booked successfully.', 'success')  # Set the flash message
+                    return render_template('user-dashboard.html')
                 except:
                      print (traceback.print_exc())
+                     flash('An error occurred while booking the apartment. Please try again.', 'error')
+                return redirect('user-dashboard') 
             else:
                  flash('Invalid username/password.Try again or Sign up.')
     return render_template('login.html')
