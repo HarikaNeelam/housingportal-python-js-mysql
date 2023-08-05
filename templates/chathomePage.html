@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Chat Room</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='chat/style.css') }}">
+  <style>
+    #theTable.chats {
+      background-color: #dedeea;
+    }
+    .page {
+      margin: 2em auto;
+      width: 60em;
+      border: 5px solid #FFF;
+      border-radius: 12px;
+      padding: 0.8em;
+      background: #f2f2f3;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <center>
+      <img src="{{ url_for('static', filename='chat/logo3.png') }}" width="130" height="130" alt="Logo" class="padding" />
+      <br>
+      <br>
+    </center>
+    <h2>Welcome, {{ name }}.</h2>
+    <br />
+    {% for mesg in get_flashed_messages() %}
+    <div class="flash">{{ mesg }}</div>
+    {% endfor %}
+    <h2>Click a chat room to join:</h2>
+    <ul class="rooms">
+      {% for entry in rooms %}
+      <li>
+        <form action="{{ url_for('room', room_name=entry.roomName) }}" method="post">
+          <input class="button" type="submit" value="{{ entry.roomName }}" />
+        </form>
+        {% if entry.userCreated == username %}
+        <form action="{{ url_for('deleteEvent', room_name=entry.roomName) }}" method="post">
+          <input class="button2" type="submit" value="Delete Room" />
+        </form>
+        {% endif %}
+      </li>
+      {% else %}
+      <li><em>No chat rooms currently exist.</em></li>
+      {% endfor %}
+    </ul>
+
+    <h2>Create a new chat room:</h2>
+    <!-- Form with 1 input - room name -->
+    <form action="" method="post">
+      <input class="login" placeholder="Room Name" type="text" name="roomName" />
+      <br />
+      <input class="button" type="submit" value="Create Room" />
+    </form>
+
+    <br/>
+
+    <form action="{{ url_for('logout') }}" method="post">
+      <input class="button" type="submit" value="Logout" />
+    </form>
+
+  </div>
+</body>
+</html>

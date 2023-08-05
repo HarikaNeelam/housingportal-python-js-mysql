@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ChatterBox</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='chat/style.css') }}">
+		<!-- <style>
+
+			#theTable.chats {
+					  background-color: #dedeea;
+					}
+			
+					.page { margin: 2em auto; width: 60em; border: 5px solid #FFF; border-radius: 12px;
+							padding: 0.8em; background: #f2f2f3; }
+				
+			</style> -->
+	</head>
+    <body>
+        <div class="page">
+            <center>
+                <img src="{{url_for('static', filename='chat/logo3.png')}}" width="130" height="130" align="middle" class="padding"/>
+                <br>
+                <br>
+                <h1>Welcome to ChatterBox,</h1>
+                <h3>A Flask Based Chatroom Application</h3>
+                <br/>
+                {% for mesg in get_flashed_messages() %}
+                <div class="flash">{{ mesg }}</div>
+                {% endfor %}
+                <form action="" method="post">
+                    <input class="login" placeholder="Email" type="text" name="user" />
+                    <br />
+                    <input class="login" placeholder="Password" type="password" name="pass" />
+                    <br />
+                    <input class="button" type="submit" value="Log in" />
+                </form>
+                <form action="{{ url_for('registerUser') }}">
+                    <br/>
+                    <input class="button" type="submit" value="Register an Account" />
+                </form>
+            </center>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='chat/style.css') }}">
+        {% for mesg in get_flashed_messages() %}    
+        <div class="flash">{{ mesg }}</div>
+         {% endfor %}
+     <center>
+     <div class = "page">
+             <center>
+                 <img src="{{url_for('static', filename='chat/logo3.png')}}" width="130" height="130" align="middle" class="padding"/>
+                 <br>
+                 <br>
+             </center>
+    <center><h2>Register Account</h2></center>
+    <br />
+        <form action = "" method="post">
+         <input class = "login" placeholder = "Name" type="text" name="newname" />
+            <br />
+         <input class = "login" placeholder = "Create Email" type="text" name="newcustomer" />
+            <br />
+             <input class = "login" placeholder = "Create Password" type="text" name="newpass" />
+            <br />
+            <input class = "button" type="submit" value="Create New Account" />
+        </form>
+    <br />
+    <form action="{{ url_for('login_room') }}">
+    <input class = "button" type="submit" value="Back to Login" />
+    </form>
+    </div>
+</center>

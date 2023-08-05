@@ -5,13 +5,34 @@ import traceback,os
 from collections import defaultdict
 from flask import session
 
-app = Flask(__name__)
-app.secret_key = 'my unobvious secret key'
 
-mysql = MySQL()
+from flask import Flask, request, session, redirect, url_for, render_template, flash, jsonify
+import os
+from models import db,User, chatRoom, messageLog
+from flask_mysqldb import MySQL
+
+app = Flask(__name__)
+
+# Database configuration
+app.config['DEBUG'] = True
+app.config['SECRET_KEY'] = 'development key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Balok@31@localhost/housing'  # Use your MySQL credentials and database name
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Initialize SQLAlchemy with the app
+db.init_app(app)
+
+@app.cli.command('initdb')
+def initdb_command():
+    cur = mysql.connection.cursor()
+    with app.open_resource('schema.sql', mode='r') as f:
+        cur.execute(f.read())
+    cur.close()
+    mysql.connection.commit()
+    print('Initialized the database.')
+
 app.secret_key = 'my unobvious secret key'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'Balok@31'
 app.config['MYSQL_DB'] = 'housing'
 app.config['MYSQL_HOST'] = 'localhost'
 mysql = MySQL(app)
@@ -64,7 +85,7 @@ def search():
             "size": row[3],
             "description": row[4],
             "price": row[5],
-            "img": row[6]        
+            "img": row[7]        
             }
         apartment_list.append(apartment)
 
@@ -286,7 +307,7 @@ def communityadd():
         mgr = request.form['mgr_per_id']
         image = request.files['image']
         if image:
-          image.save(os.path.join('static/societies', image.filename))
+          image.save(os.path.join('static/communities', image.filename))
 
         cur = mysql.connection.cursor()
         try:
@@ -547,7 +568,209 @@ def booking_history(uid):
 
 
 
+# Chat messages get appended here
+items = []
+
+@app.route("/new_item", methods=["POST"])
+def add():
+    userPosted = session['name']
+    message = request.form["one"]
+    newLine = userPosted + ": " + message
+
+    cur = mysql.connection.cursor()
+    cur.execute("INSERT INTO messagelog (userName,userSent, roomName, message) VALUES (%s,%s, %s, %s)", (session['name'],session['email'], session['chatroom'], message))
+    mysql.connection.commit()
+    cur.close()
+
+    items.append([newLine])
+    return jsonify(items)
+
+@app.route("/items")
+def get_items():
+    return jsonify(items)
+
+# By default, redirect to login
+@app.route("/messages")
+def messages():
+    return redirect(url_for("login_room"))
+
+@app.route("/login_room/", methods=["GET", "POST"])
+def login_room():
+    error = None
+
+    if request.method == "POST":
+        email = request.form["user"]
+        password = request.form["pass"]
+        print("------------------------")
+        print(email)
+        print(password)
+        print("--------^^^^^^^^^^---")
+        if not email:
+            error = 'Please enter an email.'
+        elif not password:
+            error = 'Please enter a password.'
+
+        if error is None:
+            print("NOOOOOO Errors ---")
+            user = User.query.filter_by(email=email).first()
+
+            if user is None:
+                error = 'Please enter a valid email.'
+
+            if error is None:
+                if not user.password == password:
+                    error = 'Incorrect password.'
+
+            if error is None:
+                session['email'] = email
+                session['name'] = user.name 
+                flash("Login Success!")
+                return redirect(url_for("chathomePage"))
+
+            flash(error)
+            return redirect(url_for("login_room"))
+
+        flash(error)
+
+    return render_template('login_room.html')
+
+@app.route('/delete_room/<room_name>')
+def deleteEvent(room_name):
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM chatroom WHERE roomName=%s", (room_name,))
+    cur.execute("DELETE FROM messagelog WHERE roomName=%s", (room_name,))
+    mysql.connection.commit()
+    cur.close()
+    
+    items.clear()
+    flash('Room and associated messages successfully deleted.')
+    return redirect(url_for("chathomePage"))
+items=[]
+
+@app.route('/chat/<room_name>', methods=["GET", "POST"])
+def room(room_name):
+    items.clear()
+
+    session['chatroom'] = room_name
+
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM messagelog WHERE roomName=%s ORDER BY id ASC", (room_name,))
+    chatLog = cur.fetchall()
+    cur.close()
+
+    for item in chatLog:
+        user = item['userName']
+        message = item['message']
+        completeString = user + ": " + message
+        items.append([completeString])
 
     
-if __name__ == '__main__':
-    app.run(debug = True)
+    return render_template('rooms.html', email=session['email'], roomName=room_name, messages=items)
+
+
+
+
+
+@app.route("/chathomePage", methods=["GET", "POST"])
+def chathomePage():
+    error = None
+    if request.method == "POST":
+        name = request.form["roomName"]
+
+        if not name:
+            error = 'Please enter a valid room name.'
+
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM chatroom WHERE roomName=%s", (name,))
+        checkConflict = cur.fetchone()
+        cur.close()
+
+        if checkConflict:
+            error = 'Naming conflict: chatroom with this name already exists. Please rename and try again.'
+
+        if error is None:
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO chatroom (roomName, userCreated) VALUES (%s, %s)", (name, session['email']))
+            mysql.connection.commit()
+            cur.close()
+
+            flash("New room created.")
+            return redirect(url_for("chathomePage"))
+
+        flash(error)
+
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM chatroom ORDER BY id ASC")
+    chatRooms = cur.fetchall()
+    cur.close()
+
+    return render_template('chathomePage.html', email=session['email'], rooms=chatRooms,name=session['name'],username=session['email'])
+
+@app.route("/new/", methods=["GET", "POST"])
+def registerUser():
+    if request.method == "POST":
+        error = None
+        name = request.form["newname"]
+        email = request.form["newcustomer"]
+        password = request.form["newpass"]
+        session['name'] = name
+        if not name:
+            error = 'Name is required.'
+        elif not email:
+            error = 'Email is required.'
+        elif not password:
+            error = 'Password is required.'
+        print("-----------in new-------------")
+        print(name)
+        print(email)
+        print(password)
+        print("------------------------")
+
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM user WHERE email=%s", (email,))
+        user = cur.fetchone()
+        cur.close()
+
+        if user:
+            error = 'This email already exists.'
+
+        if error is None:
+            cur = mysql.connection.cursor()
+            affected_rows = cur.execute("INSERT INTO user (name, email, password) VALUES (%s, %s, %s)", (name, email, password))
+            mysql.connection.commit()
+
+            # Print all records after insertion
+            cur.execute("SELECT * FROM user")
+            all_users = cur.fetchall()
+            for user in all_users:
+                print(user)
+
+            cur.close()
+
+            flash("New user account created.")
+            return redirect(url_for("login_room"))
+
+        flash(error)
+        return redirect(url_for("registerUser"))
+
+    return render_template('register.html')
+
+
+
+
+
+    
+
+# Logout page
+@app.route("/logout/")
+def logout():
+    session.clear()
+    flash('User logged out.')
+    return redirect(url_for("login_room"))
+
+if __name__ == "__main__":
+    # Create the database tables if they don't exist
+    with app.app_context():
+        db.create_all()
+
+    app.run()

@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <script type="text/javascript" src="{{ url_for('static', filename='chat/ourScript2.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='chat/style.css') }}">
+    <style>
+        /* Add some padding to the cells */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            padding: 10px; /* Adjust as needed */
+        }
+
+        td {
+            padding: 8px; /* Adjust as needed */
+        }
+
+        /* Add some spacing between rows */
+        tr:not(:last-child) {
+            margin-bottom: 10px; /* Adjust as needed */
+        }
+
+        /* Add some styling to the list items */
+        .chats li {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Make the username bold */
+        .username {
+            font-weight: bold;
+        }
+
+        #theTable.chats {
+          background-color: #dedeea;
+        }
+
+        .page { margin: 2em auto; width: 60em; border: 5px solid #FFF; border-radius: 12px;
+                padding: 0.8em; background: #f2f2f3; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <center>
+            <img src="{{url_for('static', filename='chat/logo3.png')}}" width="130" height="130" align="middle" class="padding"/>
+            <br>
+            <br>
+        </center>
+        <h2>Welcome to the {{roomName}} chatroom.</h2>
+        <br />
+        {% for mesg in get_flashed_messages() %}
+        <div class="flash">{{ mesg }}</div>
+        {% endfor %}
+        
+        <h2>Chatlog:</h2>
+        <br>
+
+        <table id="theTable" class="chats">
+          {% for item in items %}
+              <tr>
+                  <td>{{ item }}</td>
+              </tr>
+          {% else %}
+              <tr><td>No messages yet.</td></tr>
+          {% endfor %}
+      </table>
+      
+
+        <br>
+        <form action="" method="post">
+            <input class="message2" type="text" id="newMessage" name="newMessage" placeholder="New Message" />
+            <input class="button3" type="button" id="theButton" value="Send Message" />
+        </form>
+
+        <br/>
+        <form action="{{ url_for('chathomePage') }}">
+            <input class="button" type="submit" value="Exit Room" class="orangecolor"/>
+        </form>
+
+        <br />
+        <form action="{{ url_for('logout') }}">
+            <input class="button" type="submit" value="Logout" />
+        </form>
+    </div>
+</body>
+</html>
