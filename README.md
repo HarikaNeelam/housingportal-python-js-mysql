@@ -1,6 +1,6 @@
 Birmingham Homes - Housing Portal Website
 
-Technologies used : Python , Flask , HTML , CSS , Javascript
+Technologies used : Python , Flask , MySQL, HTML , CSS , Javascript
 
 
 Steps to setup project in your machine:
